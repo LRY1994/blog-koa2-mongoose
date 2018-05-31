@@ -3,7 +3,7 @@ const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 const userSchema = new Schema({
   username:String,
-  // password:String,
+  password:String,
   // avatar:String,
   // createTime: String
 });

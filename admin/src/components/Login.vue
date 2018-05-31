@@ -8,7 +8,7 @@
     <el-form-item label="密码" prop="password">
       <el-input type="password" v-model="password" auto-complete="off"></el-input>
     </el-form-item>
-  
+    <p style="color:red">{{note}}</p>
     <el-form-item>
       <el-button type="primary" @click="submitForm()">登录</el-button>
       <el-button @click="resetForm('ruleForm2')">重置</el-button>
@@ -20,24 +20,30 @@
 
 <script>
 import request from '../api/request.js';
-import axios from 'axios';
+import md5 from 'md5'
  export default{
    data(){
      return{
        username:'',
-       password:''
+       password:'',
+       note:''
      }
    },
    methods:{
      submitForm(){
-       let username = this.username,
-           password = this.password;
          request.login({
-          username,password
+          username:this.username,
+          password:md5(this.password).toUpperCase()
         }) 
         .then(res=>{
-          console.log(res);
+          console.log(res)
+          if(res.data=='code.ok'){
+            this.note="Login successful!"
+          }else{
+            this.note="Wrong password!"
+          }
         }).catch(err=>{
+          this.note="Server Error!"
           console.log(err);
         })
       }

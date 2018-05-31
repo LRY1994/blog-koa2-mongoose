@@ -19,7 +19,25 @@ function login(data){
     console.log(options)
     return axios(options);
 }
-
+function addPost(data){
+    let options = {
+        data: data ,
+        ...APILIST.ADD_POST    
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
+function listPost(){
+    let options = {
+        ...APILIST.LIST_POST    
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
 export default{
-    login
+    login,
+    addPost,
+    listPost
 }

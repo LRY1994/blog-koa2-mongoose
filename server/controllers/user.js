@@ -1,8 +1,13 @@
-const userHelper = require('../dbhelper/userHelper');
+const User = require('../models/user');
+const dbHelper = require('./dbHelper');
 exports.check = async(ctx, next)=>{
-   
-    let data = await userHelper.findUser(ctx.request.body)
+    let {username,password}=ctx.request.body;
+    let query = User.findOne({
+        username ,
+        password
+    });
+    let result= await dbHelper.ExecCheck(query);
 
-    ctx.response.body = data;
+    ctx.response.body = result;
     
 }
