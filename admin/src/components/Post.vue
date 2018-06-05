@@ -1,22 +1,23 @@
 <template>
-    <div v-if="editting">
+    <div v-if="editting">       
+         <el-button type="primary" @click="saveEdit()">保存</el-button>
+        <el-button type="primary" @click="editting=false">取消</el-button>
         <el-input label="标题" placeholder="标题" v-model="post.title" ></el-input>
-        <mavon-editor v-model="post.body"/>
-        <el-button type="primary" @click="saveEdit()">保存</el-button>
+        <mavon-editor v-model="post.body"/>        
     </div>
     <div v-else>
         标题：{{post.title}}
         创建时间：{{post.createTime}}
         上次修改时间：{{post.lastEditTime}}
         <el-button type="primary" @click="editting=true">编辑</el-button>
-        <div v-html="postHtml"></div>
+        <div v-html="postHtml" v-highlight></div>
     </div>
 
 </template>
 
 <script>
 import request from '../api/request.js';
-import marked from 'marked';
+import marked from 'marked'
 export default {
 
 data(){
