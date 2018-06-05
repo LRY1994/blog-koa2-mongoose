@@ -1,20 +1,20 @@
 <template>
-<div >
-    <div v-for="(post,index) in list" :key="index" >
+    <div>
         标题：{{post.title}}
         创建时间：{{post.createTime}}
         上次修改时间：{{post.lastEditTime}}
+        内容：<div v-html="post.body"></div>
     </div>
-</div>
-   
 </template>
 
 <script>
 import request from '../api/request.js';
 export default {
+
 data(){
-    return{
-        list:[]
+    return {
+        postId:this.$route.params.postId,
+        post:{}
     }
 },
 created(){
@@ -22,8 +22,8 @@ created(){
 },
 methods:{
     loadData(){
-        request.listPost({}).then(res=>{
-            this.list = res.data;
+        request.getPost({postId:this.postId}).then(res=>{
+            this.post = res.data;
             console.log(res)
         }).catch(err=>{
             console.log(err)

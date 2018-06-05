@@ -26,10 +26,8 @@ exports.ExecQuery = (query)=>{
             if (err) {
                 result = 'code.err'
               reject(result)
-            } else {
-                
-                result = res; 
-                
+            } else {                
+                result = res;                 
                 console.log(`res:${res}`);
                 resolve(result)          
             }

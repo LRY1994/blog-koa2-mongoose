@@ -1,4 +1,5 @@
 "use strict"
+const uuidv1 = require('uuid/v1')
 const mongoose = require('mongoose'),
   Schema = mongoose.Schema;
 const schema = new Schema({

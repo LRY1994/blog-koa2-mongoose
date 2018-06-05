@@ -15,11 +15,13 @@
   "dependencies": {
     "axios": "^0.18.0",
     "element-ui": "^2.3.9",
+    "marked": "^0.4.0",
     "mavon-editor": "^2.6.3",
     "md5": "^2.2.1",
     "node-sass": "^4.9.0",
     "sass-loader": "^7.0.1",
     "vue": "^2.5.2",
+    "vue-quill-editor": "^3.0.6",
     "vue-router": "^3.0.1"
   },
   "devDependencies": {

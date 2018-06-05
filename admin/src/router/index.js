@@ -2,7 +2,9 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
 import WritePost from '@/components/WritePost'
-import Posts from '@/components/Posts'
+import PostList from '@/components/PostList'
+import Post from '@/components/Post'
+
 
 
 
@@ -19,9 +21,13 @@ export default new Router({
       name: 'WritePost',
       component: WritePost
     },{
-      path: '/Posts',
-      name: 'Posts',
-      component: Posts
+      path: '/PostList',
+      name: 'PostList',
+      component: PostList
+    },{
+      path: '/Post/:postId',
+      name: 'PostGet',
+      component: Post
     }
   ]
 })

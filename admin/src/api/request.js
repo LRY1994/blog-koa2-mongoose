@@ -36,8 +36,19 @@ function listPost(){
     console.log(options)
     return axios(options);
 }
+function getPost(data){
+    let options = {
+        params: data ,
+        ...APILIST.GET_POST 
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
+
 export default{
     login,
     addPost,
-    listPost
+    listPost,
+    getPost
 }
