@@ -1,20 +1,30 @@
 <template>
-    <div>
+    <div v-if="editting">
+        <el-input label="标题" placeholder="标题" v-model="post.title" ></el-input>
+        <mavon-editor v-model="post.body"/>
+        <el-button type="primary" @click="saveEdit()">保存</el-button>
+    </div>
+    <div v-else>
         标题：{{post.title}}
         创建时间：{{post.createTime}}
         上次修改时间：{{post.lastEditTime}}
-        内容：<div v-html="post.body"></div>
+        <el-button type="primary" @click="editting=true">编辑</el-button>
+        <div v-html="postHtml"></div>
     </div>
+
 </template>
 
 <script>
 import request from '../api/request.js';
+import marked from 'marked';
 export default {
 
 data(){
     return {
         postId:this.$route.params.postId,
-        post:{}
+        post:{},
+        editting:false,
+        postHtml:''
     }
 },
 created(){
@@ -24,7 +34,28 @@ methods:{
     loadData(){
         request.getPost({postId:this.postId}).then(res=>{
             this.post = res.data;
+            this.postHtml = marked(this.post.body)
             console.log(res)
+        }).catch(err=>{
+            console.log(err)
+        })
+    },
+    saveEdit(){
+        request.editPost({
+            data:{
+                title:this.post.title,
+                body:this.post.body
+            },
+            params:{
+                postId:this.postId
+            }
+        }).then(res=>{
+            console.log(res);
+            this.$message.success('更改保存成功！')
+            this.post = res.data;
+            this.postHtml = marked(this.post.body)
+            this.editting = false;
+           
         }).catch(err=>{
             console.log(err)
         })

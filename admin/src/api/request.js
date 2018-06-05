@@ -9,7 +9,7 @@ function setAllOption(options){
     return options;
 
 }
-
+/**登录 */
 function login(data){
     let options = {
         data: data ,
@@ -19,6 +19,7 @@ function login(data){
     console.log(options)
     return axios(options);
 }
+/**文章 */
 function addPost(data){
     let options = {
         data: data ,
@@ -36,19 +37,39 @@ function listPost(){
     console.log(options)
     return axios(options);
 }
-function getPost(data){
+function getPost(params){
     let options = {
-        params: data ,
+        params ,
         ...APILIST.GET_POST 
     };
     options = setAllOption(options);
     console.log(options)
     return axios(options);
 }
-
+function editPost({data,params}){
+    let options = {
+        data,
+        params,
+        ...APILIST.EDIT_POST   
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
+function delPost(params){
+    let options = {
+        params ,
+        ...APILIST.DEL_POST 
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
 export default{
     login,
     addPost,
     listPost,
-    getPost
+    getPost,
+    editPost,
+    delPost
 }

@@ -1,4 +1,4 @@
-exports.ExecCheck = (query)=>{
+exports.Check = (query)=>{
     return new Promise((resolve,reject)=>{
         let result;
         query.exec(function (err, res) {
@@ -19,10 +19,10 @@ exports.ExecCheck = (query)=>{
 })
 }
 
-exports.ExecQuery = (query)=>{
+exports.Exec = (obj)=>{
     return new Promise((resolve,reject)=>{
         let result;
-        query.exec(function (err, res) {
+        obj.exec(function (err, res) {
             if (err) {
                 result = 'code.err'
               reject(result)
@@ -35,7 +35,7 @@ exports.ExecQuery = (query)=>{
 })
 }
 
-exports.ExecSave = (obj)=>{
+exports.Save = (obj)=>{
     return new Promise((resolve,reject)=>{
         let result;
         obj.save(function (err, res) {

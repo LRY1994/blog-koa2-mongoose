@@ -6,7 +6,7 @@ exports.check = async(ctx, next)=>{
         username ,
         password
     });
-    let result= await dbHelper.ExecCheck(query);
+    let result= await dbHelper.Check(query);
 
     ctx.response.body = result;
     

@@ -1,8 +1,10 @@
 const API_LIST = {
+    /**登录 */
     LOGIN :{
         method:'post',
         url :'/user/check'
     },
+    /**文章 */
     ADD_POST :{
         method:'post',
         url :'/post/add'
@@ -14,6 +16,14 @@ const API_LIST = {
     GET_POST:{
         method:'get',
         url :'/post/get'
+    },
+    EDIT_POST:{
+        method:'post',
+        url :'/post/edit'
+    },
+    DEL_POST:{
+        method:'get',
+        url :'/post/del'
     }
 }
 

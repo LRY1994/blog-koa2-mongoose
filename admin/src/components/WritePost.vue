@@ -2,7 +2,6 @@
 <div>
     <el-button type="success" @click="savePost" >保存</el-button>
     <el-input label="标题" placeholder="标题" v-model="title" ></el-input>
-
      <mavon-editor v-model="body"/>
 </div>
     
@@ -10,7 +9,7 @@
 
 <script>
 import request from '../api/request.js';
-import marked from 'marked';
+
 export default {
     data(){
         return {
@@ -27,7 +26,7 @@ export default {
             }
             request.addPost({
                 title:this.title,
-                body:marked(this.body)//转换成html储存
+                body:this.body
             }).then(res=>{
                 console.log(res)  ;
                 this.$message.success('发布成功！')            
