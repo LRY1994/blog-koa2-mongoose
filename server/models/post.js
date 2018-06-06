@@ -10,14 +10,6 @@ const schema = new Schema({
     tags:{
         type:Array,
         default:[]
-    },
-    createTime: {
-        type: Date,
-        default: Date.now
-    },
-    lastEditTime: {
-        type: Date,
-        default: Date.now
     }
     },{
         toJSON: {virtuals: true},//必须有这一行,下面的virtual才会取得到
@@ -29,9 +21,9 @@ const schema = new Schema({
 );
 //格式化用mongoose获取的日期
 schema.virtual('createAt').get(function () {
-    return moment(this.createTime).format('YYYY-MM-DD HH:MM');
+    return moment(this.createTime).format('YYYY-MM月-DD HH:mm');
 });
 schema.virtual('updateAt').get(function () {
-    return moment(this.lastEditTime).format('YYYY-MM-DD HH:MM');
+    return moment(this.lastEditTime).format('YYYY-MM-DD HH:mm');
 });
 module.exports = mongoose.model('Post', schema);
