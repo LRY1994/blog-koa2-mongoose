@@ -36,6 +36,7 @@ methods:{
     },
     searchByKeyword(){
         this.loadData({keyword:this.keyword});
+        
     }
 }
 }

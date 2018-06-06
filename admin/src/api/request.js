@@ -29,8 +29,9 @@ function addPost(data){
     console.log(options)
     return axios(options);
 }
-function listPost(){
+function listPost(params){
     let options = {
+        params,
         ...APILIST.LIST_POST    
     };
     options = setAllOption(options);

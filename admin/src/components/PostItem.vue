@@ -18,7 +18,7 @@
                     <el-tag size="mini">{{tag}}</el-tag>
                 </template>
             </h3>
-            <span class="desc-font">category :{{item.category }}</span>
+            <span style="background-color:pink;padding:5px;color:#fff;border-radius:5px 0">{{item.category }}</span>
             <span class="desc-font">create at :{{item.createAt }}</span>
             <span class="desc-font">last modified :{{item.updateAt}}</span> 
             <el-button  size="mini" type="danger" style="float:right;margin:0 5px " @click="delDialogVisible = true">

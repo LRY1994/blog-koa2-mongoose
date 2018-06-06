@@ -13,8 +13,22 @@ exports.add = async(ctx, next)=>{
     ctx.response.body = result;    
 }
 exports.list = async(ctx, next)=>{
-    let query = Post.find({},'title category tags createAt updateAt  _id');
-    let result= await dbHelper.Exec(query);
+    let keyword,query,result;
+    if( ctx.query.keyword){
+       keyword = ctx.query.keyword; 
+       query = Post.find({
+        $or:[{
+            title: /.*${keyword}.*/i,
+            body: /.*${keyword}.*/i
+        }]
+        },
+        'title category tags createAt updateAt _id');
+    }else{
+         query = Post.find({},'title category tags createAt updateAt  _id');
+    }
+    
+    
+    result= await dbHelper.Exec(query);
     ctx.response.body = result;   
 }
 exports.get = async(ctx, next)=>{
@@ -46,8 +60,8 @@ exports.search = async(ctx, next)=>{
     let {keyword} = ctx.query.keyword;
     let query = Post.find({
         $or:[{
-            title: /.*ll.*/i,
-            body: /.*ll.*/i
+            title: /.*${keyword}.*/i,
+            body: /.*${keyword}.*/i
         }]
     },'title category tags createAt updateAt _id');
     let result= await dbHelper.Exec(query);
