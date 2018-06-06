@@ -1,0 +1,11 @@
+{
+    "name": "myblog",
+    "version": "0.1.0",
+    "private": true,
+    "scripts": {
+        "admin-dev": "webpack-dev-server --inline --progress --config admin/build/webpack.dev.conf.js",
+        "server-dev": "./server/node_modules/.bin/nodemon --inspect server/bin/www"
+    }
+
+  }
+  

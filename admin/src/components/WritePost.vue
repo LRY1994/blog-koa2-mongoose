@@ -1,41 +1,98 @@
 <template>
-<div>
-    <el-button type="success" @click="savePost" >保存</el-button>
-    <el-input label="标题" placeholder="标题" v-model="title" ></el-input>
-     <mavon-editor v-model="body"/>
-</div>
-    
+    <div>
+        <el-select v-model="postNew.category" clearable placeholder="选择分类" size="small" >
+            <el-option
+                v-for="item in options"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+                <span style="float: left">{{ item.label }}</span>
+                <span style="float: right; color: #8492a6; font-size: 13px">{{ item.value }}</span>
+            </el-option>
+        </el-select>
+        <div class="tags" style="margin:10px 10px;display:inline-block">
+            <el-tag
+                :key="tag"
+                v-for="tag in dynamicTags"
+                closable
+                :disable-transitions="false"
+                @close="handleClose(tag)">
+                {{tag}}
+            </el-tag>
+            <el-input
+                class="input-new-tag"
+                v-if="inputTagVisible"
+                v-model="inputTag"
+                ref="saveTagInput"
+                size="small"
+                @keyup.enter.native="handleInputConfirm"
+                @blur="handleInputConfirm">
+            </el-input>
+            <el-button v-else class="button-new-tag" size="small" @click="showInput">+ New Tag</el-button>
+        </div>
+        
+        <el-input label="标题" placeholder="标题" v-model="postNew.title" > </el-input>
+        <mavon-editor v-model="postNew.body"/>
+        
+    </div>
 </template>
 
 <script>
-import request from '../api/request.js';
-
 export default {
-    data(){
-        return {
-            title:'',
-            body:''
+    props:{
+        postOld:{
+            type:Object,
+            default:()=>{
+                return {}
+            }
         }
     },
-
-    methods:{
-        savePost(){
-            if(this.title==''||this.body==''){
-                this.$message.warning('标题，正文不得为空');
-                return;
-            }
-            request.addPost({
-                title:this.title,
-                body:this.body
-            }).then(res=>{
-                console.log(res)  ;
-                this.$message.success('发布成功！')            
-            }).catch(err=>{                
-                console.log(err);
-                this.$message.error('发布失败！')
-            })
+    data(){
+        return{
+            postNew:this.postOld,
+            dynamicTags:[],
+            inputTagVisible:false,
+            inputTag:'',
+            options:[
+                {label:'学习',value:'study'},
+                {label:'生活',value:'life'},
+                {label:'旅行',value:'trip'}
+            ]
         }
-    }
+    },
+    created(){
+        if(this.postNew.tags ==undefined){
+            this.postNew.tags=[];
+        }
+        this.dynamicTags = this.postNew.tags;
+        
+    },
+    watch:{
+        dynamicTags(newval){
+            this.postNew.tags = newval;
+        }
+    },
+    methods:{
+        showInput() {
+            this.inputTagVisible = true;
+            this.$nextTick(_ => {
+            this.$refs.saveTagInput.$refs.input.focus();
+            });
+        },
+        handleClose(tag) {
+            this.dynamicTags.splice(this.dynamicTags.indexOf(tag), 1);
+            
+        },
+        handleInputConfirm() {
+            let inputTag = this.inputTag;
+            if (inputTag) {
+            this.dynamicTags.push(inputTag);
+            }
+            this.inputTagVisible = false;
+            this.inputTag = '';            
+      },
+    
+}
 }
 </script>
 

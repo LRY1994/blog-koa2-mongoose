@@ -12,6 +12,8 @@
 
 [koa2从起步到填坑](https://www.jianshu.com/p/6b816c609669)
 
+[vue使用highlight.js](https://www.jianshu.com/p/6c1e4fcc6d6f)
+
 ### 2018-5-22
 
 windows下查找特定端口
@@ -91,3 +93,10 @@ axios传params ---> 用ctx.query提取
 mongose用_id查询的话用``findById(id)``.
 
 ``npm install marked --save ``  md转化成html
+
+``npm install hightlight.js --save `` 高亮代码块
+
+### 2018-6-6
+让MongoDB自动生成和管理createTime和updateTime字段的值
+
+[Mongoose Schemas中定义日期以及timestamps选项的妙用](https://www.cnblogs.com/duhuo/p/6232534.html)

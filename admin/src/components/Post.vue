@@ -1,16 +1,29 @@
 <template>
     <div v-if="editting">       
-         <el-button type="primary" @click="saveEdit()">保存</el-button>
-        <el-button type="primary" @click="editting=false">取消</el-button>
-        <el-input label="标题" placeholder="标题" v-model="post.title" ></el-input>
-        <mavon-editor v-model="post.body"/>        
+        <el-row>
+            <el-col :span="22">
+                 <write-post ref="writePost" :postOld="post"></write-post>
+            </el-col>
+            <el-col :span="2" style="padding-left:10px">
+                <el-button type="success" size="medium" @click="saveEdit()">保存</el-button><br/><br/>
+                 <el-button type="info" size="medium" @click="cancelEdit">取消</el-button>
+            </el-col>
+        </el-row>
+        
+              
     </div>
     <div v-else>
-        标题：{{post.title}}
-        创建时间：{{post.createTime}}
-        上次修改时间：{{post.lastEditTime}}
-        <el-button type="primary" @click="editting=true">编辑</el-button>
-        <div v-html="postHtml" v-highlight></div>
+        <h1 style="display:inline">{{post.title}}</h1>
+        <div style="float:right">
+            <span class="desc-font"> category :{{post.category}}</span>
+            <span class="desc-font"> create at :{{post.createAt}}</span>
+            <span class="desc-font">last modified :{{post.updateAt}}</span>
+            <el-button type="primary" size="small" @click="editting=true">编辑</el-button>
+        </div>
+        <template v-for="tag in post.tags">
+            <el-tag size="mini" >{{tag}}</el-tag> 
+        </template>
+        <div v-html="postHtml" v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px"></div>
     </div>
 
 </template>
@@ -18,6 +31,7 @@
 <script>
 import request from '../api/request.js';
 import marked from 'marked'
+import WritePost from './WritePost'
 export default {
 
 data(){
@@ -28,6 +42,7 @@ data(){
         postHtml:''
     }
 },
+components:{ WritePost },
 created(){
     this.loadData();
 },
@@ -41,11 +56,18 @@ methods:{
             console.log(err)
         })
     },
+    cancelEdit(){
+        this.editting=false;
+        this.loadData()
+    },   
     saveEdit(){
+        const post = this.$refs.writePost.postNew;
         request.editPost({
             data:{
-                title:this.post.title,
-                body:this.post.body
+                title:post.title,
+                body:post.body,
+                tags:post.tags,
+                category:post.category
             },
             params:{
                 postId:this.postId

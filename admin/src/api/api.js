@@ -24,6 +24,10 @@ const API_LIST = {
     DEL_POST:{
         method:'get',
         url :'/post/del'
+    },
+    SEARCH_POST:{
+        method:'get',
+        url :'/post/search'
     }
 }
 

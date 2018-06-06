@@ -65,11 +65,21 @@ function delPost(params){
     console.log(options)
     return axios(options);
 }
+function searchPost(params){
+    let options = {
+        params ,
+        ...APILIST.SEARCH_POST 
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
 export default{
     login,
     addPost,
     listPost,
     getPost,
     editPost,
-    delPost
+    delPost,
+    searchPost
 }

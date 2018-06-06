@@ -4,7 +4,7 @@ exports.Check = (query)=>{
         query.exec(function (err, res) {
             if (err) {
                 result = 'code.err'
-              reject(result)
+                reject(result)
             } else {
                 if(res==null){
                     result = 'code.none';
@@ -25,7 +25,7 @@ exports.Exec = (obj)=>{
         obj.exec(function (err, res) {
             if (err) {
                 result = 'code.err'
-              reject(result)
+                reject(result)
             } else {                
                 result = res;                 
                 console.log(`res:${res}`);

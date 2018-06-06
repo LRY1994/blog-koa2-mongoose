@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Login from '@/components/Login'
-import WritePost from '@/components/WritePost'
+import AddPost from '@/components/AddPost'
 import PostList from '@/components/PostList'
 import Post from '@/components/Post'
 
@@ -17,9 +17,9 @@ export default new Router({
       name: 'Login',
       component: Login
     },{
-      path: '/WritePost',
-      name: 'WritePost',
-      component: WritePost
+      path: '/AddPost',
+      name: 'AddPost',
+      component: AddPost
     },{
       path: '/PostList',
       name: 'PostList',

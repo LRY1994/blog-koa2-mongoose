@@ -1,7 +1,10 @@
 <template>
 <div >
+    <el-input placeholder="搜索关键字" v-model="keyword">
+       <el-button slot="append" icon="el-icon-search" @click="searchByKeyword"></el-button>
+    </el-input>
     <div v-for="(post,index) in list" :key="index" >
-        <post-card :item="post"></post-card>
+        <post-item :item="post"></post-item>
     </div>
 </div>
    
@@ -9,25 +12,30 @@
 
 <script>
 import request from '../api/request.js';
-import PostCard from './PostCard'
+import PostItem from './PostItem'
 export default {
 data(){
     return{
-        list:[]
+        list:[],
+        keyword:''
     }
 },
-components:{PostCard},
+components:{PostItem},
 created(){
     this.loadData();
 },
 methods:{
-    loadData(){
-        request.listPost({}).then(res=>{
+    loadData(params){
+        if(!params) params ={};
+        request.listPost(params).then(res=>{
             this.list = res.data;
             console.log(res)
         }).catch(err=>{
             console.log(err)
         })
+    },
+    searchByKeyword(){
+        this.loadData({keyword:this.keyword});
     }
 }
 }
