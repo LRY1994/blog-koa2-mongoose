@@ -56,14 +56,3 @@ exports.del = async(ctx, next)=>{
     ctx.response.body = result;
     
 }
-exports.search = async(ctx, next)=>{
-    let {keyword} = ctx.query.keyword;
-    let query = Post.find({
-        $or:[{
-            title: /.*${keyword}.*/i,
-            body: /.*${keyword}.*/i
-        }]
-    },'title category tags createAt updateAt _id');
-    let result= await dbHelper.Exec(query);
-    ctx.response.body = result;   
-}
