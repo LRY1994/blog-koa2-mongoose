@@ -97,6 +97,10 @@ mongose用_id查询的话用``findById(id)``.
 ``npm install hightlight.js --save `` 高亮代码块
 
 ### 2018-6-6
+``npm install moment --save `` 格式化日期
+
+使用mongoose的``timestamp``/``virtual``
+
 让MongoDB自动生成和管理createTime和updateTime字段的值，参考：[Mongoose Schemas中定义日期以及timestamps选项的妙用](https://www.cnblogs.com/duhuo/p/6232534.html)
 
 格式化Date使用schema.virtual。参考
