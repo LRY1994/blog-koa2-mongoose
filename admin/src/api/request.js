@@ -1,8 +1,8 @@
 import axios from 'axios';
-import config from '../config';
+import config from '../config/index.js';
 import APILIST from './api';
 
-const BASE_URL = config.baseURL;
+const BASE_URL = config.BASE_URL;
 
 function setAllOption(options){
     options.baseURL = BASE_URL;

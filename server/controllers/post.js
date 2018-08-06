@@ -7,7 +7,7 @@ const uploadDir=config.upload_dir;
 
 
 function upload(files,title){  
-    let imgList=[],file,url;
+    let imgList=[],file,url,name;
     
     files = files['file'];//关键！！！！！！
     
@@ -16,15 +16,17 @@ function upload(files,title){
             file = files[index];     
 
             url=`uploads/${title}-${file.name}`;
+            name =`${title}-${file.name}`;
             fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
         
-            imgList.push([index,url]);
+            imgList.push([index,name]);
         }
     }else{   
         file = files;        
         url=`uploads/${title}-${file.name}`;
+        name =`${title}-${file.name}`;
         fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
-        imgList.push([0,url]);
+        imgList.push([0,name]);
     }
      
      return imgList;

@@ -154,5 +154,11 @@ https://segmentfault.com/q/1010000015899152
 最后这样
 ```
 let files = ctx.request.files;
-通过files['file[]'];取得数组。
+通过files['file'];取得数组。
 ```
+
+接下来看看怎么获取后端照片 ==> 
+``app.use(require('koa-static')(__dirname + '/uploads'))``
+
+$img2Url老是报错
+

@@ -86,12 +86,14 @@ export default {
          * pos 为原图片标志（0）
          * url 为上传后图片的url地址
          */         
-        // this.$nextTick(() => {
+       
             let imgList = this.postOld.imgList;
-            for (let  img in imgList) {
-                this.$refs.mavon.$img2Url(img[0], `${BASE_URL}img[1]`);
+
+            for (let  i=0;i<imgList.length;i++) {
+                let img = imgList[i]
+                this.$refs.mavon.$img2Url(img[0]-0, BASE_URL+img[1]);
             }
-        // })
+      
     },
     methods:{
         showInput() {

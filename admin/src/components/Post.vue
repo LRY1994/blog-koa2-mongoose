@@ -21,7 +21,7 @@
         </div>
          <span style="background-color:pink;padding:5px;color:#fff;border-radius:5px 0">{{post.category }}</span>
         <template v-for="tag in post.tags">
-            <el-tag size="mini" >{{tag}}</el-tag> 
+            <el-tag size="mini" :key="tag.index">{{tag}}</el-tag> 
         </template>
         <div v-html="postHtml"  v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px;margin-top:10px"></div>
     </div>

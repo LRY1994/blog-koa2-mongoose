@@ -26,6 +26,8 @@ onerror(app)
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
+app.use(require('koa-static')(__dirname + '/uploads'))
+
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
