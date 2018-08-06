@@ -42,6 +42,7 @@
 
 <script>
 import {mavonEditor} from 'mavon-editor'
+import {BASE_URL}from '../config/index.js'
 export default {
     props:{
         postOld:{
@@ -86,10 +87,10 @@ export default {
          * url 为上传后图片的url地址
          */         
         // this.$nextTick(() => {
-        //     let imgList = this.postOld.imgList;
-        //     for (let  i =0;i<imgList.length;i++) {
-        //         this.$refs.mavon.$img2Url(i, imgList[i]);
-        //     }
+            let imgList = this.postOld.imgList;
+            for (let  img in imgList) {
+                this.$refs.mavon.$img2Url(img[0], `${BASE_URL}img[1]`);
+            }
         // })
     },
     methods:{
@@ -119,26 +120,7 @@ export default {
         $imgDel(pos){
             delete this.img_file[pos];
         },
-        // uploadImg(){
-        //     var formdata = new FormData();
-        //     for(var _img in this.img_file){
-        //         formdata.append(_img, this.img_file[_img]);
-        //     }
-        //     request.uploadImg({                
-        //         data: {
-        //             imgFile: formdata   
-        //         },
-        //         params:{
-        //             postId:this.postOld._id
-        //         }       
-        //     }).then((res) => {
-        //         Promise.resolve(res);
-        //         console.log(res);
-        //     }).catch(err=>{
-        //         Promise.reject(err);
-        //         console.log(err);
-        //     })
-        // },
+       
     
 }
 }

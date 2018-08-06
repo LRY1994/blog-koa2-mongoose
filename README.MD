@@ -146,3 +146,13 @@ koa-body [详情介绍 https://github.com/dlau/koa-body]
 
 现在上传一个图片没有问题了，上传多个文件出现问题
 ``path must be a string or Buffer``
+
+
+### 2018-8-6
+上传多个图片，为什么不能遍历
+https://segmentfault.com/q/1010000015899152
+最后这样
+```
+let files = ctx.request.files;
+通过files['file[]'];取得数组。
+```

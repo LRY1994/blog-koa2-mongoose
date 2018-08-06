@@ -23,7 +23,7 @@
         <template v-for="tag in post.tags">
             <el-tag size="mini" >{{tag}}</el-tag> 
         </template>
-        <div v-html="postHtml" ref="mavon" v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px;margin-top:10px"></div>
+        <div v-html="postHtml"  v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px;margin-top:10px"></div>
     </div>
 
 </template>
@@ -55,10 +55,8 @@ methods:{
                 postId:this.postId
             }
         }).then(res=>{
-            this.post = res.data;
-
-            //  this.$refs.mavon.$img2Url(img[0], img[1]);
-            this.postHtml = marked(this.post.body)
+            this.post = res.data; 
+            this.postHtml = marked(this.post.body)      
             console.log(res)
         }).catch(err=>{
             console.log(err)

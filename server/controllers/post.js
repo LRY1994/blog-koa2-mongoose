@@ -6,25 +6,34 @@ const dbHelper = require('./dbHelper');
 const uploadDir=config.upload_dir;
 
 
-function upload(files,title){
-    // let count = 0;
-   let imgList=[],file,reader,ext,name,upStream;
-    for(let index in files){
-        file = files[index];
-        reader = fs.createReadStream(file.path); // 创建可读流
-        ext = file.name.split(".").pop(); // 获取上传文件扩展名
-        name=`uploads/${title}-${file.name}`,             
-        upStream = fs.createWriteStream(name); // 创建可写流
-        reader.pipe(upStream); // 可读流通过管道写入可写流
-        // count++;
-        imgList.push(name);
+function upload(files,title){  
+    let imgList=[],file,url;
+    
+    files = files['file'];//关键！！！！！！
+    
+    if(files.length){//如果是一个数组
+        for(let index in files){
+            file = files[index];     
+
+            url=`uploads/${title}-${file.name}`;
+            fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
+        
+            imgList.push([index,url]);
+        }
+    }else{   
+        file = files;        
+        url=`uploads/${title}-${file.name}`;
+        fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
+        imgList.push([0,url]);
     }
+     
+     return imgList;
    
 }
 exports.add = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
     let files = ctx.request.files;//重点
-    console.log(files)
+
     let imgList = upload(files,title);
 
     let post = new Post({

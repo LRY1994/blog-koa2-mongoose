@@ -48,7 +48,7 @@ export default {
             formdata.append('tags',post.tags);           
             formdata.append('category',post.category);          
             for(var _img in img_file){           
-                formdata.append('files', img_file[_img]);
+                formdata.append('file', img_file[_img]);
             }
            
             request.addPost({
