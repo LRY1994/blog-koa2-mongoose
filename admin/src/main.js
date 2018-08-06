@@ -5,16 +5,17 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui';
 import 'element-ui/lib/theme-chalk/index.css';
-import mavonEditor from 'mavon-editor'
 import 'mavon-editor/dist/css/index.css'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/routeros.css'
+// import 'highlight.js/styles/routeros.css'
+import 'highlight.js/styles/github.css'
+
 import '@/utils/filter';
 Vue.config.productionTip = false
 
 Vue.use(ElementUI);
-Vue.use(mavonEditor)
-// Vue.use(dateformat);
+
+
 Vue.directive('highlight',function (el) {
   let blocks = el.querySelectorAll('pre code');
   blocks.forEach((block)=>{

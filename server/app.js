@@ -5,6 +5,7 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
+const koaBody = require('koa-body');
 const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
@@ -15,24 +16,24 @@ const mongoose = require('mongoose')
 
 console.log(config.mongodb_url);
 mongoose.connect(config.mongodb_url);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
 
 // error handler
 onerror(app)
 
-
-
 // middlewares
-
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
-
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
-app.use(bodyparser({
-  enableTypes:['json', 'form', 'text']
-}))
+// app.use(bodyparser({
+//   enableTypes:['json', 'form', 'text']
+// }))
+
+
 // logger
 app.use(async (ctx, next) => {
   const start = new Date()
@@ -40,6 +41,7 @@ app.use(async (ctx, next) => {
   const ms = new Date() - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
 
 
 //cors
@@ -55,6 +57,14 @@ app.use(cors({
   credentials: true,
   allowMethods: ['GET', 'POST', 'DELETE'],
   allowHeaders: ['Content-Type', 'Authorization', 'Accept'],
+}));
+
+app.use(koaBody({
+  multipart: true,  // 允许上传多个文件
+  formidable: { 
+      uploadDir:config.uploadDir,// 上传的文件存储的路径 
+      keepExtensions: true  //  保存图片的扩展名
+  }
 }));
 
 // routes

@@ -1,13 +1,38 @@
 
 const Post = require('../models/post');
+const fs = require('fs');
 const dbHelper = require('./dbHelper');
+ const config = require('../config/index');
+const uploadDir=config.upload_dir;
+
+
+function upload(files,title){
+    // let count = 0;
+   let imgList=[],file,reader,ext,name,upStream,
+    for(let index in files){
+        file = files[index];
+        reader = fs.createReadStream(file.path); // 创建可读流
+        ext = file.name.split(".").pop(); // 获取上传文件扩展名
+        name=`uploads/${title}-${file.name}`,             
+        upStream = fs.createWriteStream(name); // 创建可写流
+        reader.pipe(upStream); // 可读流通过管道写入可写流
+        // count++;
+        imgList.push(name);
+    }
+   
+}
 exports.add = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
+    let files = ctx.request.files;
+    console.log(files)
+    let imgList = upload(files,title);
+
     let post = new Post({
         title,
         body,
         tags,
-        category
+        category,
+        imgList
     })
     let result= await dbHelper.Save(post);
     ctx.response.body = result;    

@@ -10,9 +10,9 @@ function setAllOption(options){
 
 }
 /**登录 */
-function login(data){
+function login({data}){
     let options = {
-        data: data ,
+        data,
         ...APILIST.LOGIN    
     };
     options = setAllOption(options);
@@ -20,16 +20,16 @@ function login(data){
     return axios(options);
 }
 /**文章 */
-function addPost(data){
+function addPost({data}){
     let options = {
-        data: data ,
+        data,
         ...APILIST.ADD_POST    
     };
     options = setAllOption(options);
     console.log(options)
     return axios(options);
 }
-function listPost(params){
+function listPost({params}){
     let options = {
         params,
         ...APILIST.LIST_POST    
@@ -38,7 +38,7 @@ function listPost(params){
     console.log(options)
     return axios(options);
 }
-function getPost(params){
+function getPost({params}){
     let options = {
         params ,
         ...APILIST.GET_POST 
@@ -57,7 +57,7 @@ function editPost({data,params}){
     console.log(options)
     return axios(options);
 }
-function delPost(params){
+function delPost({params}){
     let options = {
         params ,
         ...APILIST.DEL_POST 
@@ -67,6 +67,15 @@ function delPost(params){
     return axios(options);
 }
 
+function uploadImg({data}){
+    let options = {
+        data ,
+        ...APILIST.IMG_UPLOAD 
+    };
+    options = setAllOption(options);
+    console.log(options)
+    return axios(options);
+}
 export default{
     login,
     addPost,
@@ -74,4 +83,5 @@ export default{
     getPost,
     editPost,
     delPost,
+    uploadImg,
 }

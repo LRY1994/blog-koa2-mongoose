@@ -3,6 +3,7 @@
 const mongoose = require('mongoose'),
       Schema = mongoose.Schema,
       moment  = require('moment');
+
 const schema = new Schema({
     title: String,
     body: String,
@@ -10,6 +11,11 @@ const schema = new Schema({
     tags:{
         type:Array,
         default:[]
+    },
+    imgList:{
+        type:Array,
+        default:[],
+        Of:String
     }
     },{
         toJSON: {virtuals: true},//必须有这一行,下面的virtual才会取得到

@@ -32,8 +32,10 @@ import md5 from 'md5'
    methods:{
      submitForm(){
          request.login({
-          username:this.username,
-          password:md5(this.password).toUpperCase()
+           data:{
+             username:this.username,
+             password:md5(this.password).toUpperCase()
+           }          
         }) 
         .then(res=>{
           console.log(res)

@@ -32,12 +32,16 @@
         </div>
         
         <el-input label="标题" placeholder="标题" v-model="postNew.title" > </el-input>
-        <mavon-editor v-model="postNew.body"/>
+        <mavon-editor ref="mavon"
+            v-model="postNew.body"            
+            @imgAdd="$imgAdd" 
+            @imgDel="$imgDel"/>
         
     </div>
 </template>
 
 <script>
+import {mavonEditor} from 'mavon-editor'
 export default {
     props:{
         postOld:{
@@ -57,9 +61,11 @@ export default {
                 {label:'学习',value:'study'},
                 {label:'生活',value:'life'},
                 {label:'旅行',value:'trip'}
-            ]
+            ],
+             img_file: {}//统一上传
         }
     },
+    components:{ mavonEditor},
     created(){
         if(this.postNew.tags ==undefined){
             this.postNew.tags=[];
@@ -70,7 +76,21 @@ export default {
     watch:{
         dynamicTags(newval){
             this.postNew.tags = newval;
-        }
+        },
+
+    }, 
+    mounted() {   
+        /**
+         * 例如：返回数据为 res = [[pos, url], [pos, url]...]
+         * pos 为原图片标志（0）
+         * url 为上传后图片的url地址
+         */         
+        // this.$nextTick(() => {
+        //     let imgList = this.postOld.imgList;
+        //     for (let  i =0;i<imgList.length;i++) {
+        //         this.$refs.mavon.$img2Url(i, imgList[i]);
+        //     }
+        // })
     },
     methods:{
         showInput() {
@@ -90,7 +110,35 @@ export default {
             }
             this.inputTagVisible = false;
             this.inputTag = '';            
-      },
+        },
+
+
+         $imgAdd(pos, $file){
+            this.img_file[pos] = $file;
+        },
+        $imgDel(pos){
+            delete this.img_file[pos];
+        },
+        // uploadImg(){
+        //     var formdata = new FormData();
+        //     for(var _img in this.img_file){
+        //         formdata.append(_img, this.img_file[_img]);
+        //     }
+        //     request.uploadImg({                
+        //         data: {
+        //             imgFile: formdata   
+        //         },
+        //         params:{
+        //             postId:this.postOld._id
+        //         }       
+        //     }).then((res) => {
+        //         Promise.resolve(res);
+        //         console.log(res);
+        //     }).catch(err=>{
+        //         Promise.reject(err);
+        //         console.log(err);
+        //     })
+        // },
     
 }
 }

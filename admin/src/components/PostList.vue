@@ -27,7 +27,7 @@ created(){
 methods:{
     loadData(params){
         if(!params) params ={};
-        request.listPost(params).then(res=>{
+        request.listPost({params}).then(res=>{
             this.list = res.data;
             console.log(res)
         }).catch(err=>{

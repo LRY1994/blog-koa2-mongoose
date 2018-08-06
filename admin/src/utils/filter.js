@@ -6,7 +6,5 @@ import Vue from 'vue';
  * @param str {String} 格式化参数 默认 yyyy-mm-dd hh:MM:ss
  */
 Vue.filter('dateformat', (val) => {
-let tidx = val.indexOf('T'),
-    zidx = val.indexOf('Z');
-return mystr.replace("T"," ")
+
 });

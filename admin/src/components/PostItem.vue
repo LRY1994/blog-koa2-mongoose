@@ -51,7 +51,11 @@ props:{
 },
 methods:{   
     confirmDelete(){
-        request.delPost({postId:this.item._id}).then(res=>{
+        request.delPost({
+            params:{
+                postId:this.item._id
+            }
+        }).then(res=>{
             console.log(res)
             this.$message.success('删除成功！');
             this.delDialogVisible = false;

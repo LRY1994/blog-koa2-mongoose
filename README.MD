@@ -105,3 +105,44 @@ mongose用_id查询的话用``findById(id)``.
 
 格式化Date使用schema.virtual。参考
 [mongoose Schema设置virtual属性不起作用](https://cnodejs.org/topic/5532466b1b9662da568db904)
+
+
+问题：搜索、上传图片
+
+### 2018-6-7
+遇到一个很纠结的问题，目前用的postId都是使用mongoose自动生产的_id.但是在新建文章的时候，我把上传文件和保存文章的服务分开做，分别是不同的collection，如果用_id的话那上传图片的时候不知道那个_id,这种情况下只能在保存好文章之后返回_id再上传图片，这样不是很优雅。
+
+试一试用同一个collection好了
+
+
+
+form表单里有文件，又有文本，该怎么办？ 解决方案总的有两种：
+
+1、使用formData实现文件和文本同时提交
+
+2、先ajax上传文件，返回文件url，再和文本一起提交，我称作伪提交。
+
+一般数据库中存放的是图片的路径和名称，实际图片是存放在服务器上的，显示的时候只是在页面指定其路径和名称从而获取。
+
+koa-bodyParser中间件 [详情介绍 https://github.com/koajs/bodyparser]
+默认支持json form类型的数据，但是不支持form-data类型的数据 不怎么好用 
+
+koa-multer中间件 [详情介绍 https://github.com/koa-modules/multer]
+不同的koa版本，支持不同的multer版本,以及在使用的方式上也有所不同,使用方式查看以上链接文档.
+koa-multer仅仅支持multipart/form-data类型的数据
+
+koa-body [详情介绍 https://github.com/dlau/koa-body]
+支持三种类型的数据
+
+1、multipart/form-data
+2、application/x-www-urlencoded
+3、application/json
+
+[Koa2 之文件上传下载的示例代码](http://www.jb51.net/article/137369.htm)
+[](https://www.xttblog.com/?p=1753)
+
+
+使用koa-body时，文件用``ctx.request.files``获取，而不是``ctx.request.body.files``
+
+现在上传一个图片没有问题了，上传多个文件出现问题
+``path must be a string or Buffer``
