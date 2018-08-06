@@ -10,7 +10,7 @@ router.get('/del',Post.del);
 
 router.post('/add',Post.add);
 router.post('/edit',Post.edit);
-router.post('/upload',Post.upload);
+
 
 
 module.exports = router

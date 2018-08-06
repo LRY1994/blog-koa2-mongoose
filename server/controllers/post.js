@@ -8,7 +8,7 @@ const uploadDir=config.upload_dir;
 
 function upload(files,title){
     // let count = 0;
-   let imgList=[],file,reader,ext,name,upStream,
+   let imgList=[],file,reader,ext,name,upStream;
     for(let index in files){
         file = files[index];
         reader = fs.createReadStream(file.path); // 创建可读流
@@ -23,7 +23,7 @@ function upload(files,title){
 }
 exports.add = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
-    let files = ctx.request.files;
+    let files = ctx.request.files;//重点
     console.log(files)
     let imgList = upload(files,title);
 
