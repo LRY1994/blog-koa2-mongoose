@@ -49,6 +49,11 @@ exports.add = async(ctx, next)=>{
     ctx.response.body = result;    
 }
 exports.list = async(ctx, next)=>{
+    // Post.fetch(function(err,res){
+    //     if(err){
+    //         console.log(err);
+    //     }
+    // })
     let keyword,query,result;
     if( ctx.query.keyword){
        keyword = ctx.query.keyword; 

@@ -1,10 +1,9 @@
 "use strict"
 
 const mongoose = require('mongoose'),
-      Schema = mongoose.Schema,
       moment  = require('moment');
 
-const schema = new Schema({
+const PostSchema = new mongoose.Schema({
     title: String,
     body: String,
     category:String,
@@ -16,6 +15,15 @@ const schema = new Schema({
         type:Array,
         default:[],
         Of:String
+    },
+    meta:{
+        createdAt:{
+            type:Date,
+            default:Date.now()
+        },updateAt:{
+            type:Date,
+            default:Date.now()
+        }
     }
     },{
         toJSON: {virtuals: true},//必须有这一行,下面的virtual才会取得到
@@ -26,10 +34,32 @@ const schema = new Schema({
     }
 );
 //格式化用mongoose获取的日期
-schema.virtual('createAt').get(function () {
+PostSchema.virtual('createAt').get(function () {
     return moment(this.createTime).format('YYYY-MM月-DD HH:mm');
 });
-schema.virtual('updateAt').get(function () {
+PostSchema.virtual('updateAt').get(function () {
     return moment(this.lastEditTime).format('YYYY-MM-DD HH:mm');
 });
-module.exports = mongoose.model('Post', schema);
+
+PostSchema.pre('save',function(next){
+    if(this.isNew){
+        this.meta.createdAt = this.updateAt=Date.now()
+    }else{
+        this.meta.updateAt = Date.now();
+    }
+    next();
+})
+
+PostSchema.statics={
+    fetch:function(cb){
+        return 
+        this.find({})
+        .sort('meta.updateAt')
+        .exec(cb)
+    },
+    findById:function(id,cb){
+        return this.findOne({_id:id})
+        .exec(cb)
+    }
+}
+module.exports = mongoose.model('Post', PostSchema);
