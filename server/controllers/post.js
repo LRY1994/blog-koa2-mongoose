@@ -72,12 +72,12 @@ exports.list = async(ctx, next)=>{
     result= await dbHelper.Exec(query);
     ctx.response.body = result;   
 }
-exports.get = async(ctx, next)=>{
+exports.detail = async(ctx, next)=>{
     let query = Post.findById(ctx.query.postId);
     let result= await dbHelper.Exec(query);
     ctx.response.body = result;   
 }
-exports.edit = async(ctx, next)=>{
+exports.update = async(ctx, next)=>{
     let id = ctx.query.postId,
         {title,body,tags,category}=ctx.request.body;
 

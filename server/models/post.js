@@ -25,24 +25,11 @@ const PostSchema = new mongoose.Schema({
             default:Date.now()
         }
     }
-    },{
-        toJSON: {virtuals: true},//必须有这一行,下面的virtual才会取得到
-        timestamps: {//让MongoDB自动生成和管理createTime和updateTime字段的值
-             createdAt: 'createTime', 
-             updatedAt: 'lastEditTime' 
-        }
     }
 );
-//格式化用mongoose获取的日期
-PostSchema.virtual('createAt').get(function () {
-    return moment(this.createTime).format('YYYY-MM月-DD HH:mm');
-});
-PostSchema.virtual('updateAt').get(function () {
-    return moment(this.lastEditTime).format('YYYY-MM-DD HH:mm');
-});
 
 PostSchema.pre('save',function(next){
-    if(this.isNew){
+    if(this.isNew){//Document.prototype.isNew  mongoose自己会识别
         this.meta.createdAt = this.updateAt=Date.now()
     }else{
         this.meta.updateAt = Date.now();

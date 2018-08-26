@@ -4,13 +4,14 @@ const cors = require('koa2-cors');
 const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
+const session = require('koa-session');
 const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body');
 const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const post = require('./routes/post')
-
+const mongoStore = require('./models/sessionStore');
 const config = require('./config/index');
 const mongoose = require('mongoose')
 
@@ -22,6 +23,7 @@ db.on('error', console.error.bind(console, 'connection error:'));
 // error handler
 onerror(app)
 
+
 // middlewares
 app.use(json())
 app.use(logger())
@@ -31,6 +33,26 @@ app.use(require('koa-static')(__dirname + '/uploads'))
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))
+
+app.keys = ['some secret hurr'];
+
+app.use(session({
+   key: 'koa:sess',   //cookie key (default is koa:sess)
+   maxAge: 86400000,  // cookie的过期时间 maxAge in ms (default is 1 days)
+   overwrite: true,  //是否可以overwrite    (默认default true)
+   httpOnly: true, //不允许浏览器中的js代码来获取cookie，避免遭到一些恶意代码的攻击。 (default true)
+   signed: true,   //签名默认true
+   rolling: false,  //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
+   renew: false,  //(boolean) renew session when session is nearly expired,
+   store: new mongoStore({//外部存储
+    collection: 'sessions', //数据库集合
+    connection: db,     // 数据库链接实例
+    expires: 86400, // 默认时间为1天
+    name: 'session' // 保存session的表名称
+   })
+  },app));
+
+
 // app.use(bodyparser({
 //   enableTypes:['json', 'form', 'text']
 // }))
@@ -44,6 +66,12 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+//pre handle user
+app.use((ctx,next)=>{
+  let _user = ctx.session.user;
+  if(_user){ app.locals.user = _user;}
+   next();
+})
 
 
 //cors
@@ -79,4 +107,9 @@ app.on('error', (err, ctx) => {
   console.error('server error', err, ctx)
 });
 
+// if(app.get('env') ==='development'){
+//   app.setMaxListeners('showStackError',true)
+//   app.locals.pretty = true
+//   mongoose.set('debug',true)
+// }
 module.exports = app

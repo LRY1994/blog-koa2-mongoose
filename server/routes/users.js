@@ -3,7 +3,7 @@ const User = require('../controllers/user');
 
 router.prefix('/user')
 
-router.post('/check',User.check);
+router.post('/signin',User.signin);
 
 
 module.exports = router
