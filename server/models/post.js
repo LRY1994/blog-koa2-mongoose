@@ -36,7 +36,7 @@ PostSchema.pre('save',function(next){
     }
     next();
 })
-
+// Think of a static like an "override" of an "existing" method
 PostSchema.statics={
     fetch:function(cb){
         return 

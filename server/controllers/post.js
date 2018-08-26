@@ -76,6 +76,17 @@ exports.detail = async(ctx, next)=>{
     let query = Post.findById(ctx.query.postId);
     let result= await dbHelper.Exec(query);
     ctx.response.body = result;   
+
+
+    // Post.findById(ctx.query.postId,function(err,post){
+    //     Comment.find({post:id})
+    //     .populate('from','name')
+    //     .populate('reply.from reply.to','name')
+    //     .exec(function(err,comments){
+    //         ctx.response.body = {post,comments}
+    //     })
+    // })
+
 }
 exports.update = async(ctx, next)=>{
     let id = ctx.query.postId,

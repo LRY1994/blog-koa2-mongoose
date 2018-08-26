@@ -162,3 +162,13 @@ let files = ctx.request.files;
 
 $img2Url老是报错
 
+### 2018-8-26
+koa-session
+为了弥补HTTP的无状态，就有了cookies和session.之前没有seesion的时候都用的是cookies.
+
+当程序需要给某个客户端请求创建一个session时，服务器会检查请求里面是否包含sessionid,服务器把这个session找出来就行了。没有就创建，返回sessionid给客户端保存.
+
+服务端重启会清除session.session持久化方法：cookies,redis,MongoDB,硬盘内存
+[koa-session](https://www.jianshu.com/p/8f4cc45d712e)
+
+用户权限管理：中间件

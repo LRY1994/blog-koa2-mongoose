@@ -1,6 +1,6 @@
 const router = require('koa-router')()
 const Post = require('../controllers/post');
-const config = require('../config/index');
+
 
 router.prefix('/post')
 

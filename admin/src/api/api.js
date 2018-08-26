@@ -2,12 +2,12 @@ const API_LIST = {
     /**登录 */
     LOGIN :{
         method:'post',
-        url :'/user/check'
+        url :'/user/signin'
     },
     /**文章 */
     ADD_POST :{
         method:'post',
-        url :'/post/add',
+        url :'/post/new',
         headers: { 'Content-Type': `multipart/form-data`},
     },
     LIST_POST:{
@@ -16,16 +16,16 @@ const API_LIST = {
     },
     GET_POST:{
         method:'get',
-        url :'/post/get'
+        url :'/post/detail'
     },
     EDIT_POST:{
         method:'post',
-        url :'/post/edit',
+        url :'/post/update',
         // headers: { 'Content-Type': `multipart/form-data;boundary=${Math.random()}` },
     },
     DEL_POST:{
         method:'get',
-        url :'/post/del'
+        url :'/post/delete'
     },
     // IMG_UPLOAD:{
     //     method: 'post',

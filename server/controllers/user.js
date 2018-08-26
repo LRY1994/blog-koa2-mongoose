@@ -31,7 +31,7 @@ exports.signin = async(ctx, next)=>{
 
 exports.signup = (ctx,next)=>{
     let _user = ctx.request.body.user;
-    User.find({name:_user.name},function(err,user){
+    User.findOne({name:_user.name},function(err,user){
         if(err) console.log(err)
         if(user){ return ctx.response.redirect('/')}
         else{
