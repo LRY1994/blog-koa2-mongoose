@@ -35,8 +35,8 @@ function upload(files,title){
 exports.add = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
     let files = ctx.request.files;//重点
-
-    let imgList = upload(files,title);
+    let imgList=[];
+    if(files) imgList = upload(files,title);
 
     let post = new Post({
         title,
@@ -74,13 +74,18 @@ exports.list = async(ctx, next)=>{
     result= await dbHelper.Exec(query);
     ctx.response.body = result;   
 }
-exports.detail = async(ctx, next)=>{
+exports.get = async(ctx, next)=>{
     let query = Post.findById(ctx.query.postId);
     let result= await dbHelper.Exec(query);
-    ctx.response.body = result;   
+    ctx.response.body = result; 
+     
+    let id =ctx.query.postId;
 
-
-    // Post.findById(ctx.query.postId,function(err,post){
+    //{$inc:{pv:1}}表示每次增加1
+    // Post.update({_id:id},{$inc:{pv:1}},function(err){
+    //     console.log(err);
+    // });
+    // Post.findById(id,function(err,post){
     //     Comment.find({post:id})
     //     .populate('from','name')
     //     .populate('reply.from reply.to','name')

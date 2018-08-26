@@ -8,6 +8,10 @@ const PostSchema = Schema({
     title: String,
     body: String,
     category:String,
+    pv:{
+        type:Number,
+        default:0
+    },
     // category:{type:ObjectId,ref:"Category"},
     tags:{
         type:Array,
