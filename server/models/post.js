@@ -1,12 +1,14 @@
 "use strict"
 
 const mongoose = require('mongoose'),
-      moment  = require('moment');
-
-const PostSchema = new mongoose.Schema({
+      moment  = require('moment'),
+      Schema  = mongoose.Schema,
+      ObjectId = Schema.Types.ObjectId;
+const PostSchema = Schema({
     title: String,
     body: String,
     category:String,
+    // category:{type:ObjectId,ref:"Category"},
     tags:{
         type:Array,
         default:[]

@@ -1,6 +1,6 @@
 var Comment =require('../models/comment')
-exports.save = (req,res)=>{
-    let _comment = req.bofy.comment;
+exports.save = (ctx,next)=>{
+    let _comment = ctx.body.comment;
     let postId = _comment.post;
 
     if(_comment.cid){//如果是回复
