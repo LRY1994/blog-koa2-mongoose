@@ -54,7 +54,9 @@ exports.list = async(ctx, next)=>{
     //         console.log(err);
     //     }
     // })
+    
     let keyword,query,result;
+
     if( ctx.query.keyword){
        keyword = ctx.query.keyword; 
        query = Post.find({

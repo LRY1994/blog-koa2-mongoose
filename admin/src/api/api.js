@@ -16,7 +16,7 @@ const API_LIST = {
     },
     GET_POST:{
         method:'get',
-        url :'/post/detail'
+        url :'/post/get'
     },
     EDIT_POST:{
         method:'post',

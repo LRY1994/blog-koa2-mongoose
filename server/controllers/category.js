@@ -10,3 +10,29 @@ exports.save = (ctx,next)=>{
     
     
 }
+
+exports.search = (ctx,next)=>{
+    let {offset,limit,cid,keyword} = ctx.query;
+    if(cid){
+        Category
+        .findById(cid)
+        .populate({
+            path:"posts",
+            select:"title updateAt createAt",
+            options:{//分页,听说这个不好用，没试过
+                limit:limit,
+                skip:offset
+            }
+        })
+        .exec(function(err,category){
+            if(err){console.log(err)}
+            let result = category.posts.slice(offset,offset+limit);//options两者取一
+            res.redirect('/post/id');
+        })
+    }else{
+        Post.find({title:new RegExp(keyword+'.*','i')})
+    }
+    
+    
+    
+}

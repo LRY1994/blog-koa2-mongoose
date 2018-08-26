@@ -5,7 +5,7 @@ const Post = require('../controllers/post');
 router.prefix('/post')
 
 router.get('/list',Post.list);
-router.get('/detail',Post.detail);
+router.get('/get',Post.get);
 router.get('/delete',Post.del);
 // router.delete('/del',Post.del);
 
