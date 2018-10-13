@@ -39,11 +39,9 @@ exports.list = async(ctx, next)=>{
 
     if( ctx.query.keyword){
        keyword = ctx.query.keyword; 
-       query = Post.find({
-        $or:[{
-            title: /.*${keyword}.*/i,
-            body: /.*${keyword}.*/i
-        }]
+       console.log(keyword);
+       query = Post.find({    
+            body: new RegExp(`.*${keyword}.*`,'i')///^.*${keyword}.*$/i     
         },
         'title category tags createAt updateAt _id');
     }else{
@@ -51,12 +49,8 @@ exports.list = async(ctx, next)=>{
     }
     
     
-    result= await dbHelper.Exec(query);   
-    console.log(`result:${result}`)
-    
+    result= await dbHelper.Exec(query);     
     ctx.response.body = result;
-    
-     
 
 }
 exports.get = async(ctx, next)=>{

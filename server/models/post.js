@@ -17,11 +17,6 @@ const PostSchema = Schema({
         type:Array,
         default:[]
     },
-    imgList:{
-        type:Array,
-        default:[],
-        Of:String
-    },
     meta:{
         createdAt:{
             type:Date,
