@@ -31,7 +31,7 @@ const PostSchema = Schema({
 
 PostSchema.pre('save',function(next){
     if(this.isNew){//Document.prototype.isNew  mongoose自己会识别
-        this.meta.createdAt = this.updateAt=Date.now()
+        this.meta.createdAt = this.meta.updateAt=Date.now()
     }else{
         this.meta.updateAt = Date.now();
     }

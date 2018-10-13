@@ -43,9 +43,9 @@ exports.list = async(ctx, next)=>{
        query = Post.find({    
             body: new RegExp(`.*${keyword}.*`,'i')///^.*${keyword}.*$/i     
         },
-        'title category tags createAt updateAt _id');
+        'title category tags meta _id');
     }else{
-         query = Post.find({},'title category tags createAt updateAt  _id');
+         query = Post.find({},'title category tags meta  _id');
     }
     
     
