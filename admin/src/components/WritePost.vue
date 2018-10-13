@@ -43,6 +43,7 @@
 <script>
 import {mavonEditor} from 'mavon-editor'
 import {BASE_URL}from '../config/index.js'
+import request from '../api/request.js';
 export default {
     props:{
         postOld:{
@@ -63,7 +64,7 @@ export default {
                 {label:'生活',value:'life'},
                 {label:'旅行',value:'trip'}
             ],
-             img_file: {}//统一上传
+            //  img_file: {}//统一上传
         }
     },
     components:{ mavonEditor},
@@ -80,23 +81,6 @@ export default {
         },
 
     }, 
-    mounted() {   
-        /**
-         * 例如：返回数据为 res = [[pos, url], [pos, url]...]
-         * pos 为原图片标志（0）
-         * url 为上传后图片的url地址
-         */         
-       
-            let imgList = this.postOld.imgList;
-            if(imgList){
-                for (let  i=0;i<imgList.length;i++) {
-                    let img = imgList[i]
-                    this.$refs.mavon.$img2Url(img[0]-0, BASE_URL+img[1]);
-                }
-            }
-            
-      
-    },
     methods:{
         showInput() {
             this.inputTagVisible = true;
@@ -119,10 +103,17 @@ export default {
 
 
          $imgAdd(pos, $file){
-            this.img_file[pos] = $file;
+            let formData = new FormData();
+            formData.append('file',$file);
+            request.upload({
+                data:formData
+            }).then(res=>{
+                this.$refs.mavon.$img2Url(pos, res.data);
+            })
+           
         },
         $imgDel(pos){
-            delete this.img_file[pos];
+            // delete this.img_file[pos];
         },
        
     

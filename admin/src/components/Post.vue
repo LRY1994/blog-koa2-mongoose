@@ -23,12 +23,14 @@
         <template v-for="tag in post.tags">
             <el-tag size="mini" :key="tag.index">{{tag}}</el-tag> 
         </template>
+       
         <div v-html="postHtml"  v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px;margin-top:10px"></div>
     </div>
 
 </template>
 
 <script>
+import {mavonEditor} from 'mavon-editor'
 import request from '../api/request.js';
 import marked from 'marked'
 import WritePost from './WritePost'
@@ -44,7 +46,7 @@ data(){
         postHtml:''
     }
 },
-components:{ WritePost },
+components:{ WritePost ,mavonEditor},
 created(){
     this.loadData();
 },
@@ -56,6 +58,7 @@ methods:{
             }
         }).then(res=>{
             this.post = res.data; 
+            console.log(this.post.body)
             this.postHtml = marked(this.post.body)      
             console.log(res)
         }).catch(err=>{

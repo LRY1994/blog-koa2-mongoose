@@ -34,25 +34,32 @@ export default {
         //         this.$message.error('发布失败！')
         //     })
         // },
-        savePost(){            
+        async savePost(){            
             const post = this.$refs.writePost.postNew;
             if(post.title==''||post.body==''){
                 this.$message.warning('标题，正文不得为空');
                 return;
             }
-            const img_file = this.$refs.writePost.img_file;
-      
-            let formdata = new FormData();          
-            formdata.append('title',post.title);
-            formdata.append('body',post.body);
-            formdata.append('tags',post.tags);           
-            formdata.append('category',post.category);          
-            for(var _img in img_file){           
-                formdata.append('file', img_file[_img]);
-            }
+            // const img_file = this.$refs.writePost.img_file;
+
+
+
+            // let formdata = new FormData();          
+            // formdata.append('title',post.title);
+            // formdata.append('body',post.body);
+            // formdata.append('tags',post.tags);           
+            // formdata.append('category',post.category);          
+            // for(var _img in img_file){           
+            //     formdata.append('file', img_file[_img]);
+            // }
            
             request.addPost({
-               data:formdata        //之前写错成data:{formData}，一直出错  
+               data:{
+                   title:post.title,
+                   body:post.body,
+                   tags:post.tags,
+                   category:post.category
+               }          
             }).then(res=>{
                 // Promise.resolve(res);
                 this.$message.success('发布成功！') 

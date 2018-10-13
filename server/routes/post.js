@@ -6,9 +6,8 @@ const router = new Router({prefix:'/post'});
 
 router.get('/list',Post.list);
 router.get('/get',Post.get);
-router.get('/delete',Post.del);
-// router.delete('/del',Post.del);
-
+router.delete('/delete',Post.del);
+router.post('/upload',Post.upload);
 
 router.post('/new',Post.new);
 router.post('/update',Post.update);

@@ -5,46 +5,25 @@ const dbHelper = require('./dbHelper');
  const config = require('../config/index');
 const uploadDir=config.upload_dir;
 
-
-function upload(files,title){  
-    let imgList=[],file,url,name;
+exports.upload = async(ctx, next)=>{
+    let file = ctx.request.files.file;   
+    // console.log(ctx.request);
+    console.log(file);    
+    let   url=`${uploadDir}/${file.name}`;
+     let   name =`${file.name}`;
+    fs.createReadStream(file.path).pipe(fs.createWriteStream(url));
     
-    files = files['file'];//关键！！！！！！
-    if(files==undefined) return [];
-    if(files.length){//如果是一个数组
-        for(let index in files){
-            file = files[index];     
+    ctx.response.body = `localhost:3001/${url}`;
 
-            url=`uploads/${title}-${file.name}`;
-            name =`${title}-${file.name}`;
-            fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
-        
-            imgList.push([index,name]);
-        }
-    }else{   
-        file = files;        
-        url=`uploads/${title}-${file.name}`;
-        name =`${title}-${file.name}`;
-        fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
-        imgList.push([0,name]);
-    }
-     
-     return imgList;
-   
 }
 exports.new = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
-    let files = ctx.request.files;//重点
-    let imgList=[];
-    console.log(files)
-    if(files) imgList = upload(files,title);
-
+   
     let post = new Post({
         title,
         body,
         tags,
-        category,
-        imgList
+        category
     })
     let result= await dbHelper.Save(post);
     ctx.response.body = result;    
@@ -86,9 +65,8 @@ exports.get = async(ctx, next)=>{
     let query = Post.findById(id);
 
     //{$inc:{pv:1}}表示每次增加1
-    Post.update({_id:id},{$inc:{pv:1}},function(err){
-        if(err)console.log(`err:${err}`);
-    });
+    let update = Post.update({_id:id},{$inc:{pv:1}});
+    dbHelper.Exec(update);
 
     let result= await dbHelper.Exec(query);
     ctx.response.body = result;

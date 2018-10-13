@@ -13,7 +13,7 @@ const post = require('./routes/post')
 // const mongoStore = require('./models/sessionStore');
 const config = require('./config/index');
 const mongoose = require('mongoose')
-
+const path = require('path')
 console.log(config.mongodb_url);
 mongoose.connect(config.mongodb_url);
 var db = mongoose.connection;
@@ -27,8 +27,9 @@ onerror(app)
 app.use(json())
 app.use(logger())
 app.use(require('koa-static')(__dirname + '/public'))
-app.use(require('koa-static')(__dirname + '/uploads'))
-
+// app.use(require('koa-static')(__dirname + '/uploads'))
+app.use(require('koa-static')(path.join(__dirname + '/uploads')))
+app.use(require('koa-static')('.'));
 app.use(views(__dirname + '/views', {
   extension: 'pug'
 }))

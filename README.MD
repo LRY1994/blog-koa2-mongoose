@@ -157,6 +157,58 @@ https://segmentfault.com/q/1010000015899152
 let files = ctx.request.files;
 通过files['file'];取得数组。
 ```
+一次上次多张图片的代码：
+```js
+ ADD_POST :{
+        method:'post',
+        url :'/post/new',
+        headers: { 'Content-Type': `multipart/form-data`},
+    },
+```
+```js
+function upload(files,title){  
+    let imgList=[],file,url,name;
+    
+    files = files['file'];//关键！！！！！！
+    if(files==undefined) return [];
+    if(files.length){//如果是一个数组
+        for(let index in files){
+            file = files[index];     
+
+            url=`uploads/${title}-${file.name}`;
+            name =`${title}-${file.name}`;
+            fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
+        
+            imgList.push([index,name]);
+        }
+    }else{   
+        file = files;        
+        url=`uploads/${title}-${file.name}`;
+        name =`${title}-${file.name}`;
+        fs.createReadStream(file.path).pipe(fs.createWriteStream(url))
+        imgList.push([0,name]);
+    }
+     
+     return imgList;
+   
+}
+exports.new = async(ctx, next)=>{
+    let {title,body,tags,category}=ctx.request.body;
+    let files = ctx.request.files;//重点
+    let imgList=[];
+    if(files) imgList = upload(files,title);
+
+    let post = new Post({
+        title,
+        body,
+        tags,
+        category,
+        imgList
+    })
+    let result= await dbHelper.Save(post);
+    ctx.response.body = result;    
+}
+```
 
 接下来看看怎么获取后端照片 ==> 
 ``app.use(require('koa-static')(__dirname + '/uploads'))``
@@ -182,4 +234,6 @@ koa-session
 
 * 今天一直搞不懂404错误，最后在一个中间件加上await next()就可以了。
 **所有中间件都要加上await next()，无论它有没有提供数据给下一个**
+
+*  图片还是一张一张上传比较好，不然mavonEditor得不到图片地址。传完立刻用``$img2Url``把图片地址插入到md里面
 

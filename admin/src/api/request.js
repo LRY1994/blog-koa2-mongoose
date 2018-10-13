@@ -68,10 +68,10 @@ function delPost({params}){
     return axios(options);
 }
 
-function uploadImg({data}){
+function upload({data}){
     let options = {
         data ,
-        ...APILIST.IMG_UPLOAD 
+        ...APILIST.UPLOAD 
     };
     options = setAllOption(options);
     console.log(options)
@@ -84,5 +84,5 @@ export default{
     getPost,
     editPost,
     delPost,
-    uploadImg,
+    upload,
 }

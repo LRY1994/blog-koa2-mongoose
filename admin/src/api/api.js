@@ -5,10 +5,15 @@ const API_LIST = {
         url :'/user/signin'
     },
     /**文章 */
+    UPLOAD :{
+        method:'post',
+        url :'/post/upload',
+        headers: { 'Content-Type': `multipart/form-data`},
+    },
     ADD_POST :{
         method:'post',
         url :'/post/new',
-        headers: { 'Content-Type': `multipart/form-data`},
+        // headers: { 'Content-Type': `multipart/form-data`},
     },
     LIST_POST:{
         method:'get',
@@ -24,7 +29,7 @@ const API_LIST = {
         // headers: { 'Content-Type': `multipart/form-data;boundary=${Math.random()}` },
     },
     DEL_POST:{
-        method:'get',
+        method:'delete',
         url :'/post/delete'
     },
     // IMG_UPLOAD:{
