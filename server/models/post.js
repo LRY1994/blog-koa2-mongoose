@@ -39,11 +39,10 @@ PostSchema.pre('save',function(next){
 })
 // Think of a static like an "override" of an "existing" method
 PostSchema.statics={
-    fetch:function(cb){
-        return 
-        this.find({})
-        .sort('meta.updateAt')
-        .exec(cb)
+    fetch: function(query){
+       
+       return  this.find(query).sort('meta.updateAt')
+      
     },
     // findById:function(id,cb){
     //     return this.findOne({_id:id})

@@ -6,15 +6,10 @@ const dbHelper = require('./dbHelper');
 const uploadDir=config.upload_dir;
 
 exports.upload = async(ctx, next)=>{
-    let file = ctx.request.files.file;   
-    // console.log(ctx.request);
-    console.log(file);    
-    let   url=`${uploadDir}/${file.name}`;
-     let   name =`${file.name}`;
-    fs.createReadStream(file.path).pipe(fs.createWriteStream(url));
-    
+    let file = ctx.request.files.file;      
+    let   url=`${uploadDir}/${Date.now()}/${file.name}`;
+    fs.createReadStream(file.path).pipe(fs.createWriteStream(url));   
     ctx.response.body = `localhost:3001/${url}`;
-
 }
 exports.new = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
@@ -39,15 +34,12 @@ exports.list = async(ctx, next)=>{
 
     if( ctx.query.keyword){
        keyword = ctx.query.keyword; 
-       console.log(keyword);
        query = Post.find({    
-            body: new RegExp(`.*${keyword}.*`,'i')///^.*${keyword}.*$/i     
-        },
-        'title category tags meta _id');
+            body: new RegExp(`.*${keyword}.*`,'i')    
+        }).sort('-meta.updateAt');
     }else{
-         query = Post.find({},'title category tags meta  _id');
+         query = Post.find({}).sort('-meta.updateAt');
     }
-    
     
     result= await dbHelper.Exec(query);     
     ctx.response.body = result;
