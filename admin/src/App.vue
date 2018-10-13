@@ -9,7 +9,7 @@
           <el-menu-item index="1">
             <i class="el-icon-menu"></i> 
             <span slot="title">
-              <router-link :to="{path:'/Login'}">登录</router-link>
+              <router-link :to="{path:'/Login'}">登录后台</router-link>
             </span>
           </el-menu-item>
           <el-menu-item index="2">

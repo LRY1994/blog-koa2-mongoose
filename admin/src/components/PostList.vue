@@ -29,8 +29,10 @@ methods:{
         if(!params) params ={};
         request.listPost({params}).then(res=>{
             this.list = res.data;
-            console.log(res)
+           console.log(res)
+           
         }).catch(err=>{
+            console.log('err:')
             console.log(err)
         })
     },

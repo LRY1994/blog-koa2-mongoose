@@ -10,7 +10,7 @@ function upload(files,title){
     let imgList=[],file,url,name;
     
     files = files['file'];//关键！！！！！！
-    
+    if(files==undefined) return [];
     if(files.length){//如果是一个数组
         for(let index in files){
             file = files[index];     
@@ -32,10 +32,11 @@ function upload(files,title){
      return imgList;
    
 }
-exports.add = async(ctx, next)=>{
+exports.new = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;
     let files = ctx.request.files;//重点
     let imgList=[];
+    console.log(files)
     if(files) imgList = upload(files,title);
 
     let post = new Post({
@@ -55,7 +56,7 @@ exports.list = async(ctx, next)=>{
     //     }
     // })
     
-    let keyword,query,result;
+    let keyword,query,result=[];
 
     if( ctx.query.keyword){
        keyword = ctx.query.keyword; 
@@ -71,20 +72,27 @@ exports.list = async(ctx, next)=>{
     }
     
     
-    result= await dbHelper.Exec(query);
-    ctx.response.body = result;   
+    result= await dbHelper.Exec(query);   
+    console.log(`result:${result}`)
+    
+    ctx.response.body = result;
+    
+     
+
 }
 exports.get = async(ctx, next)=>{
-    let query = Post.findById(ctx.query.postId);
-    let result= await dbHelper.Exec(query);
-    ctx.response.body = result; 
-     
+    
     let id =ctx.query.postId;
+    let query = Post.findById(id);
 
     //{$inc:{pv:1}}表示每次增加1
-    // Post.update({_id:id},{$inc:{pv:1}},function(err){
-    //     console.log(err);
-    // });
+    Post.update({_id:id},{$inc:{pv:1}},function(err){
+        if(err)console.log(`err:${err}`);
+    });
+
+    let result= await dbHelper.Exec(query);
+    ctx.response.body = result;
+ 
     // Post.findById(id,function(err,post){
     //     Comment.find({post:id})
     //     .populate('from','name')

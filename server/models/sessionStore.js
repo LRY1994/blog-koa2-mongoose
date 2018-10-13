@@ -8,7 +8,7 @@ const schema = {
     } 
 };
 
-export default class MongooseStore { 
+ class MongooseStore { 
     constructor ({ 
         collection = 'sessions', 
         connection = null, 
@@ -49,3 +49,4 @@ export default class MongooseStore {
         } 
     }
 
+module.exports = MongooseStore;

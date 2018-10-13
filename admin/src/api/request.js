@@ -36,6 +36,7 @@ function listPost({params}){
     };
     options = setAllOption(options);
     console.log(options)
+   
     return axios(options);
 }
 function getPost({params}){

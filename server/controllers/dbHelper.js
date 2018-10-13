@@ -23,10 +23,10 @@ exports.Exec = (obj)=>{
     return new Promise((resolve,reject)=>{
         let result;
         obj.exec(function (err, res) {
-            if (err) {
+            if (err) {               
                 result = 'code.err'
                 reject(result)
-            } else {                
+            } else {   
                 result = res;                 
                 console.log(`res:${res}`);
                 resolve(result)          

@@ -23,6 +23,7 @@ netstat -aon|findstr "3000"
 ```
 
 ``W:\MongoDB\bin\mongod --dbpath W:\MongoDB\data`` 运行 MongoDB 服务器
+D:\ruiyuqueen\software\MongoDB\bin\mongod --dbpath D:\ruiyuqueen\software\MongoDB\data
 
 ``mongo `` 连接MongoDB
 
@@ -172,3 +173,13 @@ koa-session
 [koa-session](https://www.jianshu.com/p/8f4cc45d712e)
 
 用户权限管理：中间件
+
+### 2018-10-13
+* npm install bcrypt报错.
+ Can't find Python executable "python", you can set the PYTHON env variable.
+
+这里需要依赖python.推荐使用bcrypt-
+
+* 今天一直搞不懂404错误，最后在一个中间件加上await next()就可以了。
+**所有中间件都要加上await next()，无论它有没有提供数据给下一个**
+

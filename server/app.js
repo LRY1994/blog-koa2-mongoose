@@ -5,13 +5,12 @@ const views = require('koa-views')
 const json = require('koa-json')
 const onerror = require('koa-onerror')
 const session = require('koa-session');
-const bodyparser = require('koa-bodyparser')
 const koaBody = require('koa-body');
 const logger = require('koa-logger')
 const index = require('./routes/index')
 const users = require('./routes/users')
 const post = require('./routes/post')
-const mongoStore = require('./models/sessionStore');
+// const mongoStore = require('./models/sessionStore');
 const config = require('./config/index');
 const mongoose = require('mongoose')
 
@@ -44,12 +43,12 @@ app.use(session({
    signed: true,   //签名默认true
    rolling: false,  //在每次请求时强行设置cookie，这将重置cookie过期时间（默认：false）
    renew: false,  //(boolean) renew session when session is nearly expired,
-   store: new mongoStore({//外部存储
-    collection: 'sessions', //数据库集合
-    connection: db,     // 数据库链接实例
-    expires: 86400, // 默认时间为1天
-    name: 'session' // 保存session的表名称
-   })
+  //  store: new mongoStore({//外部存储
+  //   collection: 'sessions', //数据库集合
+  //   connection: db,     // 数据库链接实例
+  //   expires: 86400, // 默认时间为1天
+  //   name: 'session' // 保存session的表名称
+  //  })
   },app));
 
 
@@ -67,10 +66,10 @@ app.use(async (ctx, next) => {
 })
 
 //pre handle user
-app.use((ctx,next)=>{
+app.use(async(ctx,next)=>{
   let _user = ctx.session.user;
   if(_user){ app.locals.user = _user;}
-   next();
+   await next();
 })
 
 

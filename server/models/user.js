@@ -1,6 +1,6 @@
 "use strict"
 const mongoose = require('mongoose'),
-bcrypt = require('bcrypt'),//加盐算法
+bcrypt = require('bcrypt-nodejs'),//加盐算法
 SALT_WORK_FACTOR = 10;
 const userSchema = new mongoose.Schema({
   username:{

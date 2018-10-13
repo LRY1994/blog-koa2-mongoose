@@ -88,11 +88,13 @@ export default {
          */         
        
             let imgList = this.postOld.imgList;
-
-            for (let  i=0;i<imgList.length;i++) {
-                let img = imgList[i]
-                this.$refs.mavon.$img2Url(img[0]-0, BASE_URL+img[1]);
+            if(imgList){
+                for (let  i=0;i<imgList.length;i++) {
+                    let img = imgList[i]
+                    this.$refs.mavon.$img2Url(img[0]-0, BASE_URL+img[1]);
+                }
             }
+            
       
     },
     methods:{
