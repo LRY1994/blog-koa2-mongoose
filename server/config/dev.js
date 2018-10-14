@@ -5,7 +5,8 @@ module.exports = {
     mongodb_url:'mongodb://localhost/koa_vue_blog',    //数据库地址
     redis_url:'',       //redis地址
     redis_port: '' ,     //redis端口号
-    upload_dir:'uploads'
+    upload_dir:'public/uploads',
+    host:'127.0.0.1'
 
 }
 

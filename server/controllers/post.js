@@ -1,15 +1,18 @@
 
 const Post = require('../models/post');
 const fs = require('fs');
+const path  = require('path');
 const dbHelper = require('./dbHelper');
  const config = require('../config/index');
-const uploadDir=config.upload_dir;
+const {upload_dir,host,port}=config;
+const moment =require('moment')
 
 exports.upload = async(ctx, next)=>{
-    let file = ctx.request.files.file;      
-    let   url=`${uploadDir}/${Date.now()}/${file.name}`;
-    fs.createReadStream(file.path).pipe(fs.createWriteStream(url));   
-    ctx.response.body = `localhost:3001/${url}`;
+    let file = ctx.request.files.file;  
+    let t = moment(Date.now()).format('YYMMDD');
+    let  url=`${upload_dir}/${t}-${file.name}`;
+    fs.createReadStream(file.path).pipe(fs.createWriteStream(url));
+    ctx.response.body = `${host}:${port}/${url}`;
 }
 exports.new = async(ctx, next)=>{
     let {title,body,tags,category}=ctx.request.body;

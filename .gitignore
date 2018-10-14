@@ -8,7 +8,7 @@ admin/yarn-error.log*
 admin/test/unit/coverage/
 admin/test/e2e/reports/
 admin/selenium-debug.log
-
+server/public/uploads
 # Editor directories and files
 .idea
 .vscode
