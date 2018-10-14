@@ -37,11 +37,13 @@ PostSchema.pre('save',function(next){
     }
     next();
 })
+
+
 // Think of a static like an "override" of an "existing" method
 PostSchema.statics={
     fetch: function(query){
        
-       return  this.find(query).sort('meta.updateAt')
+       return  this.find(query).sort('-meta.updateAt')
       
     },
     // findById:function(id,cb){
@@ -50,3 +52,4 @@ PostSchema.statics={
     // }
 }
 module.exports = mongoose.model('Post', PostSchema);
+

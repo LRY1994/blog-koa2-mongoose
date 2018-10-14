@@ -14,6 +14,10 @@
 
 [vue使用highlight.js](https://www.jianshu.com/p/6c1e4fcc6d6f)
 
+[阿里云ECS服务器部署Node.js项目全过程详解](https://www.jianshu.com/p/2e31fd9eb048)
+[Nodejs项目部署阿里云完整流程](https://blog.csdn.net/u013263917/article/details/79037770)
+[ koa2使用阿里云oss的nodejs sdk实现上传图片](https://www.cnblogs.com/beileixinqing/p/9152113.html)
+[](https://help.aliyun.com/document_detail/50775.html?spm=5176.doc25426.6.655.kn1mB7)
 ### 2018-5-22
 
 windows下查找特定端口
@@ -139,6 +143,9 @@ koa-body [详情介绍 https://github.com/dlau/koa-body]
 2、application/x-www-urlencoded
 3、application/json
 
+新版本的koa-body通过ctx.request.files获取上传的文件。
+旧版本的koa-body通过ctx.request.body.files获取上传的文件 
+
 [Koa2 之文件上传下载的示例代码](http://www.jb51.net/article/137369.htm)
 [](https://www.xttblog.com/?p=1753)
 
@@ -237,3 +244,8 @@ koa-session
 
 *  图片还是一张一张上传比较好，不然mavonEditor得不到图片地址。传完立刻用``$img2Url``把图片地址插入到md里面
 
+### 2018-10-14
+中间件一般仅仅只能限于在几个方法中使用. (但感觉就已经是全部了)
+init,validate,save,remove;
+
+非常重要的一点是中间件只是在document级别有效，如findAndUpdate等方法不会触发中间件，因为这不是document级别的操作。

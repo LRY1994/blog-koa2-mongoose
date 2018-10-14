@@ -19,8 +19,8 @@
                 </template>
             </h3>
             <span style="background-color:pink;padding:5px;color:#fff;border-radius:5px 0">{{item.category }}</span>
-            <span class="desc-font">create at :{{item.meta.createdAt }}</span>
-            <span class="desc-font">last modified :{{item.meta.updateAt}}</span> 
+            <span class="desc-font">create at :{{item.meta.createdAt|dateformat}}</span>
+            <span class="desc-font">last modified :{{item.meta.updateAt|dateformat}}</span> 
             <el-button  size="mini" type="danger" style="float:right;margin:0 5px " @click="delDialogVisible = true">
                 <i class="el-icon-delete"></i>
             </el-button>
@@ -64,7 +64,8 @@ methods:{
             console.log(err)
             this.$message.error('删除失败！')
         })
-    }
+    },
+    
 }
 }
 </script>

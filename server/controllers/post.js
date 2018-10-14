@@ -71,15 +71,14 @@ exports.update = async(ctx, next)=>{
     let id = ctx.query.postId,
         {title,body,tags,category}=ctx.request.body;
 
-    let update = Post.findByIdAndUpdate(
-       id,
-       { title,body ,tags,category},
+    let update = Post.findOneAndUpdate(
+       {_id:id},
+       { title,body ,tags,category,'meta.updateAt':Date.now()},
        { new :true } // true to return the modified document rather than the original.
     );   
-        
+
     let result= await dbHelper.Exec(update);
-    ctx.response.body = result;
-    
+    ctx.response.body = result;  
 }
 exports.del = async(ctx, next)=>{
     let del = Post.findByIdAndDelete(ctx.query.postId);

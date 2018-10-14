@@ -26,17 +26,11 @@ const API_LIST = {
     EDIT_POST:{
         method:'post',
         url :'/post/update',
-        // headers: { 'Content-Type': `multipart/form-data;boundary=${Math.random()}` },
     },
     DEL_POST:{
         method:'delete',
         url :'/post/delete'
     },
-    // IMG_UPLOAD:{
-    //     method: 'post',
-    //     url:'/img/upload',
-    //     headers: { 'Content-Type': 'multipart/form-data' },
-    // }
 }
 
 
