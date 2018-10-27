@@ -1,10 +1,10 @@
 <template>
     <div class="photo-block">
         <img class="rope" src="@/assets/img/rope.png"/>
-        <div class="photo-box1">
+        <div class="photo-box1 rotate1">
             <img src="@/assets/img/me/1.jpg"/>
         </div>
-        <div class="photo-box2">
+        <div class="photo-box2 rotate2">
             <img src="@/assets/img/me/2.jpg"/>
         </div>
     </div>
@@ -25,6 +25,30 @@ export default {
         top:-45px;
         right:0;
         z-index:2;
+    }
+    .rotate1{
+     animation: rotation-1 4s  ease-in-out infinite alternate;
+    }
+    @keyframes rotation-1
+        {
+        0% {
+            transform: rotate(-6deg);
+        }   
+        100% {
+            transform: rotate(-16deg);
+        }
+    }
+    .rotate2{
+     animation: rotation-2 2s  ease-in-out infinite alternate;
+    }
+     @keyframes rotation-2
+        {
+        0% {
+            transform: rotate(10deg);
+        }
+        100% {
+            transform: rotate(6deg);
+        }
     }
      .photo-box1{
          width:300px;
