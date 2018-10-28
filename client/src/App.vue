@@ -5,6 +5,7 @@
       <photo class="photo"/>
       <my-header class="header" ></my-header> 
     </div>
+    <router-view/>
     <footer></footer>
   </div>
 </template>
@@ -41,18 +42,20 @@ export default {
 .center-block{
   width:$center-width;
   margin:0 auto;
-  .motto{
-      float: left;
-  }
-  .photo{
-      margin-left:400px;
-  }
-  .header{
-    position: relative;
-    top: -25px;
-    margin-left:-60px;
-  }
 }
+
+.motto{
+    float: left;
+}
+.photo{
+    margin-left:400px;
+}
+.header{
+  position: relative;
+  top: -25px;
+  margin-left:-60px;
+}
+
 
 footer{
   background:url('~@/assets/img/foot-mushroom.png') repeat-x;
