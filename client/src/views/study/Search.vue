@@ -33,7 +33,7 @@ export default {
 <style lang="scss" scoped>
 @import '@/assets/style/variable.scss';
 .search-block{
-    padding: 20px;
+    padding: $block-padding;
     border-radius:20px 0;
     .input{
         background-color:$blue;
@@ -54,8 +54,7 @@ export default {
             font-size:14px;
             width: 80%;
         }
-        .button{
-            display: inline;
+        .button{           
              background-color:$blue;
              padding:0;
              margin:0;

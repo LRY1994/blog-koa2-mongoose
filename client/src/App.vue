@@ -37,8 +37,8 @@ export default {
   background: $background-color;
   margin:0;
   padding: 0;
-  height: 100%;
 }
+
 .center-block{
   width:$center-width;
   margin:0 auto;

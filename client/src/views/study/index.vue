@@ -29,7 +29,9 @@ data(){
 .articles{
     width:69%;
     float: right;
-    height:100px;
+    box-sizing: border-box;
     background-color:#fff;
+    position: relative;
+    top:-45px;
 }
 </style>

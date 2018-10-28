@@ -17,6 +17,7 @@ props:['data']
 <style lang="scss" scoped>
 .motto-block{
     position: relative;
+    left:100px;
     height:330px;
     width: 300px;
     display: flex;
