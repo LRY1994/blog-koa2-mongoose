@@ -52,7 +52,7 @@ export default {
 }
 .header{
   position: relative;
-  top: -25px;
+  top: -10px;
   margin-left:-60px;
 }
 

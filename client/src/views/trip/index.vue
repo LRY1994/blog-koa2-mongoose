@@ -1,29 +1,36 @@
 <template>
-    <div>
-        <motto class="motto" :data="motto"/>
-        <photo class="photo"/>
+    <div class="center-block trip">
+        <template v-for="item in trips">
+            <trip-item :data="item"></trip-item>
+        </template>
     </div>
 </template>
 
 <script>
-import Motto from '@/components/Motto.vue'
-import Photo from '@/components/Photo.vue'
+import TripItem from './TripItem.vue'
 
 export default {
-components:{Motto,Photo},
+components:{ TripItem },
 data(){
     return{
-        motto:'想在暖风醉人的季节里，去赴一场花宴。你若同行，愿与你一路畅聊这风花雪月。'
+       trips:[{
+           location:'云南',
+           period:'2017.5.20-2017.5.28',
+           img:require('@/assets/img/me/2.jpg'),
+           link:'http://www.mafengwo.cn/i/7399490.html'
+       },{
+           location:'马来西亚',
+           period:'2017.5.20-2017.5.28',
+           img:require('@/assets/img/me/1.jpg'),
+           link:'http://www.mafengwo.cn/i/10253694.html'
+       }]
     }
 }
 }
 </script>
 
 <style lang="scss" scoped>
-.motto{
-    float: left;
-}
-.photo{
-    margin-left:400px;
+.trip{
+    display: flex;
 }
 </style>

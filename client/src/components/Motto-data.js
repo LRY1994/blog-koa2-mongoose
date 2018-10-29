@@ -13,7 +13,7 @@ const data = {
     },
     'about':{
         author:'',
-        he_says:'我是xxx'
+        he_says:'我文笔不好，只是像记录'
     },
 }
 

@@ -31,7 +31,5 @@ data(){
     float: right;
     box-sizing: border-box;
     background-color:#fff;
-    position: relative;
-    top:-45px;
 }
 </style>
