@@ -60,6 +60,9 @@ app.use(session({
 
 // logger
 app.use(async (ctx, next) => {
+  ctx.set("Access-Control-Allow-Origin","*");
+  ctx.set("Access-Control-Allow-Headers","X-request-With");
+  ctx.set("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
   const start = new Date()
   await next()
   const ms = new Date() - start
