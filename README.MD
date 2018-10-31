@@ -249,3 +249,8 @@ koa-session
 init,validate,save,remove;
 
 非常重要的一点是中间件只是在document级别有效，如findAndUpdate等方法不会触发中间件，因为这不是document级别的操作。
+
+
+### 2018-10-31
+一般是在本地npm run serve看效果,但是终端关掉就访问不了了。在VPS上怎么做才不会关掉终端之后还可以继续访问?用 **pm2** !!
+``pm2 start npm --watch --name XXX -- run start   相当于 (npm run start)``
