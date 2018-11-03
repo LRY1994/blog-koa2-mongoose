@@ -19,15 +19,12 @@ props:['data']
 <style lang="scss" scoped>
 @import '@/assets/style/variable.scss';
 .trip-item-block{
-    width: 50%;
-    height:255px;
     background: #fff;
     position: relative;
     margin-right: 20px;
-    .img-holder{ 
-        position: absolute;
-        width:50%;
-        height:100%;      
+    margin-bottom: 20px;
+    break-inside: avoid;
+    .img-holder{      
         overflow: hidden;
         img{
             width:100%;
@@ -35,10 +32,7 @@ props:['data']
         }
     }
     .text-holder{
-        margin-left:50%;
-        height: 100%;
-        display: inline-block;
-        padding: 20px;
+       padding: 0 20px 20px 20px;
         h3{
             color:$pink;
             a{
