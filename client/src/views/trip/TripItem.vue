@@ -4,9 +4,8 @@
             <img :src="data.img"/>
         </div>
         <div class="text-holder">
-            <h3>{{data.location}}</h3>
+            <h3><a :href="data.link" target="_blank">{{data.location}}</a></h3>
             <p>{{data.period}}</p>
-            <p><a :href="data.link" target="_blank">记录</a></p>
         </div>
     </div>
 </template>
@@ -21,10 +20,9 @@ props:['data']
 @import '@/assets/style/variable.scss';
 .trip-item-block{
     width: 50%;
-    height:200px;
+    height:255px;
     background: #fff;
     position: relative;
-    border-radius:0 0 50px 0;
     margin-right: 20px;
     .img-holder{ 
         position: absolute;
@@ -43,11 +41,12 @@ props:['data']
         padding: 20px;
         h3{
             color:$pink;
+            a{
+                text-decoration: none;
+                color:inherit;
+            }
         }
     }
-    a{
-        text-decoration: none;
-        color:$blue;
-    }
+    
 }
 </style>

@@ -2,13 +2,15 @@
     <div class="search-block">
         <div class="input">
             <input v-model="keyword" />
-           <span class="button" @click="search(keyword)"><img src="@/assets/img/search-btn.png"/></span>
+           <span class="button" @click="searchByKey(keyword)">
+               <img src="@/assets/img/search-btn.png"/>
+            </span>
         </div>
         <div class="tags">
-            <div v-for="(t,index) in tags" class="tag">
+            <div v-for="(t,index) in tags" class="tag" :key="index">
                 <img src="@/assets/img/pink-flower.png" v-if="index%2"/>
                 <img src="@/assets/img/blue-flower.png" v-else/>
-                <span class="text" @click="search(t)">{{t}}</span>
+                <span class="text" @click="searchByTag(t)">{{t}}</span>
             </div>
         </div>
     </div>
@@ -18,13 +20,16 @@
 export default {
     data(){
         return{
-            keyword:'搜索',
+            keyword:'',
             tags:['HTML','CSS','JAVASCRIPT','JAVASCRIPT','CSS','CSS','JAVASCRIPT']
         }
     },
     methods:{
-        search(key){
-            console.log(key)
+        searchByKey(key){
+            this.$emit('searchByKey',key);
+        },
+        searchByTag(tag){
+            this.$emit('searchByTag',tag);
         }
     }
 }

@@ -4,6 +4,8 @@ import Trip from '@/views/trip';
 import Study from '@/views/study'
 import Read from '@/views/read'
 import Photograph from '@/views/photograph'
+import Article from '@/views/study/Article'
+
 
 Vue.use(Router)
 
@@ -14,6 +16,11 @@ export default new Router({
       path: '/study',
       name: 'study',
       component: Study
+    }, {
+    
+      path: '/article/:id',
+      name: 'article',
+      component: Article
     },
     {
       path: '/read',

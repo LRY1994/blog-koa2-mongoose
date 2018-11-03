@@ -15,13 +15,13 @@ data(){
     return{
        trips:[{
            location:'云南',
-           period:'2017.5.20-2017.5.28',
+           period:'2017.6.21  -  2017.6.29',
            img:require('@/assets/img/me/2.jpg'),
            link:'http://www.mafengwo.cn/i/7399490.html'
        },{
            location:'马来西亚',
-           period:'2017.5.20-2017.5.28',
-           img:require('@/assets/img/me/1.jpg'),
+           period:'2018.8.10  -  2018.8.19',
+           img:require('@/assets/img/me/Malaysias.jpg'),
            link:'http://www.mafengwo.cn/i/10253694.html'
        }]
     }

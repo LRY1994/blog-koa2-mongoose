@@ -13,7 +13,6 @@ const API_LIST = {
     ADD_POST :{
         method:'post',
         url :'/post/new',
-        // headers: { 'Content-Type': `multipart/form-data`},
     },
     LIST_POST:{
         method:'get',

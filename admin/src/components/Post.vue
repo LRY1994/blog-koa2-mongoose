@@ -15,26 +15,24 @@
     <div v-else>
         <h1 style="display:inline;">{{post.title}}</h1>
         <div style="float:right">
-            <span class="desc-font"> create at :{{post.createAt}}</span>
-            <span class="desc-font">last modified :{{post.updateAt}}</span>
+            <span class="desc-font"> create at :{{post.meta.createdAt|dateformat}}</span>
+            <span class="desc-font">last modified :{{post.meta.updateAt|dateformat}}</span>
             <el-button type="primary" size="small" @click="editting=true">编辑</el-button>
         </div>
          <span style="background-color:pink;padding:5px;color:#fff;border-radius:5px 0">{{post.category }}</span>
         <template v-for="tag in post.tags">
             <el-tag size="mini" :key="tag.index">{{tag}}</el-tag> 
         </template>
-       
-        <div v-html="postHtml"  v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px;margin-top:10px"></div>
+       <div v-html="postHtml"  v-highlight style="border: 1px solid #d3d3d3;border-radius: 10px;padding:10px;margin-top:10px"></div>
     </div>
+        
 
 </template>
 
 <script>
-import {mavonEditor} from 'mavon-editor'
 import request from '../api/request.js';
 import marked from 'marked'
 import WritePost from './WritePost'
-import {BASE_URL}from '../config/index.js'
 
 export default {
 
@@ -46,7 +44,7 @@ data(){
         postHtml:''
     }
 },
-components:{ WritePost ,mavonEditor},
+components:{ WritePost },
 created(){
     this.loadData();
 },

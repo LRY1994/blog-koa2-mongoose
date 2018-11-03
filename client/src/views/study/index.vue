@@ -1,7 +1,7 @@
 <template>
     <div class="center-block">
-        <search class="search"></search>
-        <articles class="articles"></articles>       
+        <search class="search" @searchByKey="searchByKey" @searchByTag="searchByTag"></search>
+        <articles class="articles" ref="articles"></articles>       
     </div>
 </template>
 
@@ -14,6 +14,14 @@ components:{Search,Articles},
 data(){
     return{
        
+    }
+},
+methods:{
+    searchByKey(key){
+        this.$refs.articles.searchByKeyword(key);
+    },
+     searchByTag(tag){
+        this.$refs.articles.searchByTag(tag);
     }
 }
 }

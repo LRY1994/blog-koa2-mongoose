@@ -245,7 +245,7 @@ koa-session
 *  图片还是一张一张上传比较好，不然mavonEditor得不到图片地址。传完立刻用``$img2Url``把图片地址插入到md里面
 
 ### 2018-10-14
-中间件一般仅仅只能限于在几个方法中使用. (但感觉就已经是全部了)
+mongoose中间件一般仅仅只能限于在几个方法中使用. (但感觉就已经是全部了)
 init,validate,save,remove;
 
 非常重要的一点是中间件只是在document级别有效，如findAndUpdate等方法不会触发中间件，因为这不是document级别的操作。
@@ -254,3 +254,6 @@ init,validate,save,remove;
 ### 2018-10-31
 一般是在本地npm run serve看效果,但是终端关掉就访问不了了。在VPS上怎么做才不会关掉终端之后还可以继续访问?用 **pm2** !!
 ``pm2 start npm --watch --name XXX -- run start   相当于 (npm run start)``
+
+### 2018-11-3
+不要在服务器里面上传图片了，怕以后占的空间太大，直接用github里面的图片的链接好了

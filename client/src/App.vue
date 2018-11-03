@@ -3,9 +3,9 @@
     <div class="center-block">
       <motto class="motto" :data="mottoData"/>
       <photo class="photo"/>
-      <my-header class="header" ></my-header> 
+      <my-header class="header" ></my-header>    
+      <router-view/> 
     </div>
-    <router-view/>
     <footer></footer>
   </div>
 </template>
@@ -22,7 +22,8 @@ export default {
   },
   computed:{
     mottoData(){
-      return MOTTO_DATA[this.$route.name];
+      
+      return MOTTO_DATA[this.$route.name]||'';
     }
   }
 }
@@ -42,6 +43,7 @@ export default {
 .center-block{
   width:$center-width;
   margin:0 auto;
+  margin-bottom: 100px;
 }
 
 .motto{
@@ -53,7 +55,6 @@ export default {
 .header{
   position: relative;
   top: -10px;
-  margin-left:-60px;
 }
 
 
@@ -63,6 +64,7 @@ footer{
   bottom: 0;
   width:100%;
   height: 40px;
+ 
 }
 
 </style>
