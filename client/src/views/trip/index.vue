@@ -1,7 +1,7 @@
 <template>
     <div class="center-block trip">
-        <template v-for="item in trips">
-            <trip-item :data="item"></trip-item>
+        <template v-for="(item,index) in trips">
+            <trip-item :data="item" :key="index"></trip-item>
         </template>
     </div>
 </template>

@@ -6,7 +6,16 @@
                <img src="@/assets/img/search-btn.png"/>
             </span>
         </div>
+    <div  class="category">
+    <h5>分类</h5>
+        <div v-for="(t,index) in category" class="tag" :key="index">
+                <img src="@/assets/img/pink-flower.png" v-if="index%2"/>
+                <img src="@/assets/img/blue-flower.png" v-else/>
+                <span class="text" @click="searchByCategory(t)">{{t}}</span>
+        </div>
+    </div>
         <div class="tags">
+            <h5>标签</h5>
             <div v-for="(t,index) in tags" class="tag" :key="index">
                 <img src="@/assets/img/pink-flower.png" v-if="index%2"/>
                 <img src="@/assets/img/blue-flower.png" v-else/>
@@ -21,7 +30,8 @@ export default {
     data(){
         return{
             keyword:'',
-            tags:['HTML','CSS','JAVASCRIPT','JAVASCRIPT','CSS','CSS','JAVASCRIPT']
+            tags:['HTML','CSS','JAVASCRIPT','JAVASCRIPT','CSS','CSS','JAVASCRIPT'],
+            category:['专题笔记','每月总结']
         }
     },
     methods:{
@@ -40,6 +50,7 @@ export default {
 .search-block{
     padding: $block-padding;
     border-radius:20px 0;
+   
     .input{
         background-color:$blue;
         color:#fff;
@@ -47,8 +58,9 @@ export default {
        padding: 2px 5px;
        display: flex;
        justify-content: center;
-       width: 80%;
+        width: 80%;
         margin: 0 auto;
+        margin-bottom: 20px;
         input{
             background-color:$blue;
             border:none;
@@ -77,28 +89,33 @@ export default {
         }
 
     }
+    .category{
+        .text{
+            font-size: 20px!important;
+        }
+    }
     .tags{
-        margin-top:20px;
-    
         .tag{
-            display: inline-block;
+            display: inline-block;    
+        }
+    }
+    .tag{        
             margin-right:10px;
             margin-bottom: 15px;
-            color:$pink;
+            color:$blue;
             &:hover{
                 cursor: pointer;
             }
             &:nth-child(2n+1){
-                color:$blue
+                color:$pink;
             }
              img{
                 width:15px;
                 height:15px;
             }
             .text{
-                font-size:16px;
+                font-size:18px;
             }
         }
-    }
 }
 </style>
