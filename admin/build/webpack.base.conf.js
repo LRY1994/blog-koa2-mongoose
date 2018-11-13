@@ -22,7 +22,7 @@ const createLintingRule = () => ({
 module.exports = {
   context: path.resolve(__dirname, '../'),
   entry: {
-    app: './src/main.js'
+    app: './src/main.js'// app: ['babel-polyfill', './src/main.js']兼容不支持ES6的浏览器
   },
   output: {
     path: config.build.assetsRoot,
@@ -49,6 +49,10 @@ module.exports = {
       {
         test: /\.js$/,
         loader: 'babel-loader',
+        //这个相当于 loader: 'babel-loader?presets=es2015',
+        // query: {
+        //   presets: ['es2015']
+        // },
         include: [resolve('src'), resolve('test'), resolve('node_modules/webpack-dev-server/client')]
       },
       {

@@ -15,7 +15,11 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    rules: utils.styleLoaders({ sourceMap: config.dev.cssSourceMap, usePostCSS: true })
+    //给独立的style文件添加了sourceMap功能，有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码。
+    rules: utils.styleLoaders({ 
+      sourceMap: config.dev.cssSourceMap, 
+      usePostCSS: true 
+    })
   },
   // cheap-module-eval-source-map is faster for development
   devtool: config.dev.devtool,
@@ -49,7 +53,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
       'process.env': require('../config/dev.env')
     }),
     new webpack.HotModuleReplacementPlugin(),
-    new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.
+    new webpack.NamedModulesPlugin(), // HMR shows correct file names in console on update.在热加载时直接返回更新文件名
     new webpack.NoEmitOnErrorsPlugin(),
     // https://github.com/ampedandwired/html-webpack-plugin
     new HtmlWebpackPlugin({
@@ -67,7 +71,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-
+//确保启动程序时，如果端口被占用时，会通过portfinder来发布新的端口。
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {

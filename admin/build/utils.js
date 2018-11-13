@@ -11,7 +11,7 @@ exports.assetsPath = function (_path) {
 
   return path.posix.join(assetsSubDirectory, _path)
 }
-
+//cssLoaders用于加载.vue文件中的样式
 exports.cssLoaders = function (options) {
   options = options || {}
 
@@ -42,15 +42,14 @@ exports.cssLoaders = function (options) {
       })
     }
 
-    // Extract CSS when that option is specified
-    // (which is the case during production build)
+    // Extract CSS when that option is specified(which is the case during production build)
     if (options.extract) {
-      return ExtractTextPlugin.extract({
+      return ExtractTextPlugin.extract({//ExtractTextPlugin分离vue中引入的css文件
         use: loaders,
-        fallback: 'vue-style-loader'
+        fallback: 'vue-style-loader'//没有被提取分离时使用的loader
       })
     } else {
-      return ['vue-style-loader'].concat(loaders)
+      return ['vue-style-loader'].concat(loaders)//['vue-style-loader','cssLoader', 'postcssLoader']
     }
   }
 
@@ -66,7 +65,7 @@ exports.cssLoaders = function (options) {
   }
 }
 
-// Generate loaders for standalone style files (outside of .vue)
+//styleLoaders用于加载不在.vue文件中的单独存在的样式文件 Generate loaders for standalone style files (outside of .vue)
 exports.styleLoaders = function (options) {
   const output = []
   const loaders = exports.cssLoaders(options)
@@ -81,7 +80,7 @@ exports.styleLoaders = function (options) {
 
   return output
 }
-
+//以类似浏览器的通知的形式展示信息
 exports.createNotifierCallback = () => {
   const notifier = require('node-notifier')
 

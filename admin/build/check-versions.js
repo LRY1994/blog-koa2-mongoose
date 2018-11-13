@@ -1,3 +1,4 @@
+/**检测当前环境中的node和npm版本和我们需要的是否一致的。 */
 'use strict'
 const chalk = require('chalk')
 const semver = require('semver')
@@ -11,12 +12,12 @@ function exec (cmd) {
 const versionRequirements = [
   {
     name: 'node',
-    currentVersion: semver.clean(process.version),
+    currentVersion: semver.clean(process.version),//node的版本号，process是node的全局变量
     versionRequirement: packageConfig.engines.node
   }
 ]
 
-if (shell.which('npm')) {
+if (shell.which('npm')) {//检查npm是否是全局命令
   versionRequirements.push({
     name: 'npm',
     currentVersion: exec('npm --version'),
