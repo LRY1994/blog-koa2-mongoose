@@ -267,4 +267,7 @@ yum install nodejs
 搭建网站过程
 https://www.jianshu.com/p/4895cda92808
 
-mongod --dbpath=/home/mongodb/data --logpath /home/mongodb/logs/log.log -fork
+添加到开机自启动项
+vi /etc/rc.d/rc.local
+mongod --dbpath /home/mongodb/data --logpath /home/mongodb/logs/log.log -fork
+chmod +x /etc/rc.d/rc.local
