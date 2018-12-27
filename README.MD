@@ -257,3 +257,14 @@ init,validate,save,remove;
 
 ### 2018-11-3
 不要在服务器里面上传图片了，怕以后占的空间太大，直接用github里面的图片的链接好了
+
+### 2018-12-27
+centos 安装nodejs
+yum install -y gcc-c++ make
+curl -sL https://rpm.nodesource.com/setup_9.x | sudo -E bash -
+yum install nodejs
+
+搭建网站过程
+https://www.jianshu.com/p/4895cda92808
+
+mongod --dbpath=/home/mongodb/data --logpath /home/mongodb/logs/log.log -fork
