@@ -27,7 +27,7 @@ netstat -aon|findstr "3000"
 ```
 
 ``W:\MongoDB\bin\mongod --dbpath W:\MongoDB\data`` 运行 MongoDB 服务器
-D:\ruiyuqueen\software\MongoDB\bin\mongod --dbpath D:\ruiyuqueen\software\MongoDB\data
+pm2
 
 ``mongo `` 连接MongoDB
 
@@ -264,10 +264,28 @@ yum install -y gcc-c++ make
 curl -sL https://rpm.nodesource.com/setup_9.x | sudo -E bash -
 yum install nodejs
 
+ngix安装
+https://www.cnblogs.com/taiyonghai/p/6728707.html
+
 搭建网站过程
 https://www.jianshu.com/p/4895cda92808
+
+
 
 添加到开机自启动项
 vi /etc/rc.d/rc.local
 mongod --dbpath /home/mongodb/data --logpath /home/mongodb/logs/log.log -fork
 chmod +x /etc/rc.d/rc.local
+
+添加环境变量
+vim /etc/profile
+在最后，添加:
+export PATH="/usr/local/mongodb/bin:$PATH"
+保存，退出，然后运行：
+source /etc/profile不报错则成功。
+
+tar zxvf openssl-fips-2.0.10.tar.gz -C /home
+./config && make && make install
+
+sbin/nginx -s reload
+

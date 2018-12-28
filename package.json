@@ -12,7 +12,11 @@
 
         "run-server":"npm run run-mongodb && npm run server-dev",
         "run-front":"npm run admin-dev && npm run client-dev",
-        "dev":"npm run run-server && npm run run-front"
+        "dev":"npm run run-server && npm run run-front",
+
+        "admin-build":"cd admin && git pull && npm run build",
+        "client-build":"cd client && git pull && npm run build",
+        "deploy":"npm run admin-build && npm run client-build "
         
         
     }
