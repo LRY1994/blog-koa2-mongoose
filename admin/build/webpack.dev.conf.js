@@ -15,10 +15,10 @@ const PORT = process.env.PORT && Number(process.env.PORT)
 
 const devWebpackConfig = merge(baseWebpackConfig, {
   module: {
-    //给独立的style文件添加了sourceMap功能，有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码。
-    rules: utils.styleLoaders({ 
-      sourceMap: config.dev.cssSourceMap, 
-      usePostCSS: true 
+    // 给独立的style文件添加了sourceMap功能，有了它，出错的时候，除错工具将直接显示原始代码，而不是转换后的代码。
+    rules: utils.styleLoaders({
+      sourceMap: config.dev.cssSourceMap,
+      usePostCSS: true
     })
   },
   // cheap-module-eval-source-map is faster for development
@@ -29,8 +29,8 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     clientLogLevel: 'warning',
     historyApiFallback: {
       rewrites: [
-        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') },
-      ],
+        { from: /.*/, to: path.posix.join(config.dev.assetsPublicPath, 'index.html') }
+      ]
     },
     hot: true,
     contentBase: false, // since we use CopyWebpackPlugin.
@@ -45,7 +45,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     proxy: config.dev.proxyTable,
     quiet: true, // necessary for FriendlyErrorsPlugin
     watchOptions: {
-      poll: config.dev.poll,
+      poll: config.dev.poll
     }
   },
   plugins: [
@@ -71,7 +71,7 @@ const devWebpackConfig = merge(baseWebpackConfig, {
     ])
   ]
 })
-//确保启动程序时，如果端口被占用时，会通过portfinder来发布新的端口。
+// 确保启动程序时，如果端口被占用时，会通过portfinder来发布新的端口。
 module.exports = new Promise((resolve, reject) => {
   portfinder.basePort = process.env.PORT || config.dev.port
   portfinder.getPort((err, port) => {
@@ -86,11 +86,11 @@ module.exports = new Promise((resolve, reject) => {
       // Add FriendlyErrorsPlugin
       devWebpackConfig.plugins.push(new FriendlyErrorsPlugin({
         compilationSuccessInfo: {
-          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`],
+          messages: [`Your application is running here: http://${devWebpackConfig.devServer.host}:${port}`]
         },
         onErrors: config.dev.notifyOnErrors
-        ? utils.createNotifierCallback()
-        : undefined
+          ? utils.createNotifierCallback()
+          : undefined
       }))
 
       resolve(devWebpackConfig)
